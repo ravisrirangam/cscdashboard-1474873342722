@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>CSC-Asset-Dashboard</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.eclipsesource.jshint.ui.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.nodeclipse.ui.NodeNature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+	</natures>
+	<variableList>
+		<variable>
+			<name>VCAP_SERVICES</name>
+			<value>file:/Users/sudhirkthakur/Downloads/cscdashboarddemo_vcap.json</value>
+		</variable>
+	</variableList>
+</projectDescription>

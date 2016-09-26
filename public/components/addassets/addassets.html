@@ -1,0 +1,93 @@
+<section id="addassets" class="sections sections-tight">
+	<div class="container">
+		<div class="row">
+			<form name="addAssetsForm">
+            <div class="text-center">
+                <h4>Add - Modify Assets</h4>
+            </div>
+			<div class="col-md-12">
+				<table>
+					<tr>
+						<td> <h4> <span class="label label-primary">Link : </span></h4></td>  
+						<td><input type="text" name="addAssetsForm.link" ng-model="addAssetsForm.link" size="50"  ><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="searchLink()"  >Search<span class="glyphicon" aria-hidden="true"></span></a></td>
+					<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validlink}}</span>
+                        </div>
+                    </td>
+					<td>
+                        <div ng-app="app">
+                            <div class="btn-group">
+                                <a class="disabled btn   pull-left"  ></span></a>
+                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-1" ></span></a>
+                            </div>
+                        </div>
+                    </td>
+						
+					</tr>				
+					<tr>
+						<td><h4><span class="label label-primary">Asset Title : </span></h4></td>
+						<td ><input type="text" name="addAssetsForm.title" ng-model="addAssetsForm.title" size="50" ></td>
+						<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validtitle}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td><h4><span class="label label-primary">Industry Group : </span></h4></td>
+						<td><input type="text" name="addAssetsForm.industry" ng-model="addAssetsForm.industry" size="50"  ></td>
+						<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validindustry}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td> <h4> <span class="label label-primary">Service Category : </span></h4></td>
+						<td><input type="text" name="addAssetsForm.category" ng-model="addAssetsForm.category" size="50"  ></td>
+												<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validcategory}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td> <h4> <span class="label label-primary">Description : </span></h4></td>
+						<td ><textarea name="addAssetsForm.description" ng-model="addAssetsForm.description" cols="60" rows="3" ></textarea></td>
+																		<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validdescription}}</span>
+                        </div>
+                    </td>
+											
+					</tr>
+					<tr>
+						<td> <h4> <span class="label label-primary">Images : </span></h4></td>
+						<td><input type="file" file-model="addAssetsForm.image"/></td>						
+					</tr>
+					<tr>
+						<td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="addupdateAssets()"  >Add Modify Records<span class="glyphicon" aria-hidden="true"></span></a></td>					
+						<td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>					
+					</tr>
+					
+					<td>
+                        <div ng-app="app">
+                            <div class="btn-group">
+                                <a class="disabled btn   pull-left"  ></span></a>
+                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-2" ></span></a>
+                            </div>
+                        </div>
+                    </td>
+										
+				</table>
+			</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+
