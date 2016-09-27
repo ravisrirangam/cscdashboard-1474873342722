@@ -10,9 +10,28 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService, $r
 //        alert('fetching assets details');
         
         $http.get('/api/fetchassetsdtls').success(function (assetdetails) {
+        	
 
-            $scope.assetrecords = assetdetails;
+            $scope.assetrecords = assetdetails;   
+            
+            for(var i=0; i< assetdetails.length;i++){
+                //	alert($scope);
+                	 var description = assetdetails[i].description;
+                
+                	 if( description != undefined &&  description.length > 70 ){
+                	     $scope.assetrecords[i].truncatedDescription = description.substring(0,70)+"...";
+                	     $scope.truncated = true;
+                	    
+                	     $scope.assetrecords[i].truncated = true;
+                	     
+                	 }else{
+                		 $scope.assetrecords[i].notTruncated = true; 
+                	 }
+                    
+                  }
+           
             $scope.stopSpin();
+           
         });
 
         
@@ -24,7 +43,10 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService, $r
     $scope.propertyName = 'title';
     $scope.reverse = true;
     
+    
 
+    
+    $scope.menuselectedfilter='service_category';
     
     $scope.sortBy = function(propertyName) {
         $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
@@ -33,11 +55,32 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService, $r
 
 		$scope.filterCategory = function(filtername){
 			$scope.filterType=filtername;
+
 			
 		}
+		
+		$scope.selectedFilter = function(filtername,selectedfilter){
+			
+			$scope.filterType=filtername;
+			
+			if(selectedfilter=='industry')
+				{
+			
+				$scope.menuselectedfilter='industry';
+				}
+			else if (selectedfilter=='service_category')
+				{
+			
+				$scope.menuselectedfilter='service_category';
+				}
+			
+			
+		}
+		
+		
 
 
-
+ 
 
 
 

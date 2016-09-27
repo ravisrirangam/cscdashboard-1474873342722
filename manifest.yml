@@ -5,4 +5,8 @@ applications:
   domain: mybluemix.net
   name: cscdashboarddemo
   host: cscdashboarddemo
+<<<<<<< Updated upstream
   disk_quota: 1024M
+=======
+  disk_quota: 1024M
+>>>>>>> Stashed changes
