@@ -6,5 +6,3 @@ applications:
   name: cscdashboarddemo
   host: cscdashboarddemo
   disk_quota: 1024M
-  services:
-  - cscdashboarddemo-cloudantNoSQLDB
