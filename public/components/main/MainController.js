@@ -1,4 +1,4 @@
-var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'context', function($scope, $rootScope, $state, $sessionStorage, context) {
+var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'context','$http', function($scope, $rootScope, $state, $sessionStorage, context,$http) {
 
 	$scope.$storage = $sessionStorage;
 
@@ -17,9 +17,65 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 		$state.go('landing');
 	};
 
+
+	$scope.modeldialoglogin = function() {		
+		 $("#userLogin").modal();
+	};
+
+	
+	$scope.userlogin = function() {
+		
+		
+		
+		var uname = angular.element('[id="username"]').val();
+		var pass = angular.element('[id="password"]').val();
+		
+		
+        var userlogindata = JSON.stringify({
+        	userid: uname,
+        	password: pass
+        });
+  
+        var config = {
+                headers : {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                }
+            }
+
+        
+        
+		var res = $http.get('api/searchuser', {
+            params: {
+            	userid: uname,
+            	password: pass
+            }
+        },config);
+
+        res.success(function(data, status, headers, config) {
+        	$scope.assetrecords="";
+        	$scope.assetrecords = data;
+//        	alert(JSON.stringify(data));
+        	if(JSON.stringify(data)=='{"UserExists":"False","PWCheck":"False"}')
+        		{
+        		alert('User is not registered');
+        		}
+        	else if(JSON.stringify(data)=='{"UserExists":"True","PWCheck":"False"}')
+        		{
+        		alert('Invalid Password');
+        		}
+        });
+        res.error(function(data, status, headers, config) {
+        	
+            alert( "failure message: " + JSON.stringify({data: data}));
+        });
+        
+        
+
+	};
+
+	
 	$scope.goHome = function() {
 		if ($scope.getSession() == null) {
-		//	$state.go('landing');
 			$state.go('dashboard');
 		} else {
 			$state.go('dashboard');
