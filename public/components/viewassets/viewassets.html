@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="action-items pull-center">
-				<div class="action-item pull-left">
+				<div class="action-item pull-left" style="margin-left: 0px;">
 					<font size="2">Filter by:</font>
 					<div class="btn-group">
 						<a class="btn btn-info pull-right "
@@ -61,21 +61,21 @@
 					<div data-ng-init="fetchassetsdetails()">
 
 
-						<div class="col-sm-1"
+						<div class="col-sm-1" style="padding-left: 0px;"
 							ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'">
 
 
 
 							<ul class="nav nav-stacked pull-left">
 
-								<li><a href="{{menu.action}}" style="color: #3366CC;"
+								<li><a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
 									data-toggle="dropdown" data-ui-sref="viewassets"
 									ng-class="{'dropdown-toggle': menu.menus}"
 									ng-click="filterCategory(assetrecord.service_category)">All</a>
 								</li>
 								<li ng-class="{dropdown: menu.menus}"
 									ng-repeat="assetrecord in assetrecords| unique: 'service_category'">
-									<a href="{{menu.action}}" style="color: #3366CC;"
+									<a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
 									data-toggle="dropdown" data-ui-sref="viewassets"
 									ng-class="{'dropdown-toggle': menu.menus}"
 									ng-click="filterCategory(assetrecord.service_category)">{{assetrecord.service_category}}</a>
@@ -84,20 +84,20 @@
 						</div>
 
 
-						<div class="col-sm-1"
+						<div class="col-sm-1" style="padding-left: 0px;"
 							ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'">
 
 
 
 							<ul class="nav nav-stacked pull-left">
 
-								<li><a href="{{menu.action}}" style="color: #3366CC;"
+								<li><a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
 									data-ui-sref="viewassets"
 									ng-class="{'dropdown-toggle': menu.menus}"
 									ng-click="filterCategory(assetrecord.industry)">All</a></li>
 								<li ng-class="{dropdown: menu.menus}"
 									ng-repeat="assetrecord in assetrecords| unique: 'industry'">
-									<a href="{{menu.action}}" style="color: #3366CC;"
+									<a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
 									data-toggle="dropdown" data-ui-sref="viewassets"
 									ng-class="{'dropdown-toggle': menu.menus}"
 									ng-click="filterCategory(assetrecord.industry)">{{assetrecord.industry}}</a>
@@ -107,7 +107,7 @@
 
 
 
-						<div class="col-md-11">
+						<div class="col-md-11" style="padding-left: 0px;">
 							<div class="table-responsive" ng-hide="mode==2">
 								<table class="table table-hover table-striped"
 									ng-show="assetrecords.length > 0">
@@ -138,7 +138,7 @@
 
 							<div
 								ng-repeat-start="assetrecord in assetrecords | filter:filterType | orderBy:propertyName:reverse"
-								ng-class="{'col-md-4':mode==1, 'col-md-3':mode==2}">
+								ng-class="{'col-md-4':mode==1, 'col-md-3':mode==2}" style="padding-left: 0px;">
 
 								<div class="well" ng-show="mode==2">
 									<h5 style="margin-top: 0px;">
