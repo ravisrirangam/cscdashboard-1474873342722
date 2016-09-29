@@ -34,7 +34,7 @@ app.use('/style', express.static(path.join(__dirname, '/views/style')));
 
 app.get('/', routes.index);
 
-app.get('/api/searchuser', function(request, response){
+app.post('/api/searchuser', function(request, response){
 	console.log("POST method invoked..Verifying if the user is having admin right...");
 	var i = 0;
 	var found = 0;
@@ -42,14 +42,10 @@ app.get('/api/searchuser', function(request, response){
 	var document;
 	var myDoc;
 	
+	console.log('User id is ..' + request.body.userid);
+	console.log('Password id is ..' + request.body.password);
 	
-	
-	
-	console.log('User id is ..' + request.param("userid"));
-	console.log('Password id is ..' + request.param("password"));
-	
-//	userdb.find({selector:{"userid": request.body.userid}}, function(er, result) {
-	userdb.find({selector:{"userid": request.param("userid")}}, function(er, result) {
+	userdb.find({selector:{"userid": request.body.userid}}, function(er, result) {
 		  if (er) {
 			console.log('selector failed..');
 			response.status(500);
@@ -70,12 +66,9 @@ app.get('/api/searchuser', function(request, response){
 			  
 		  }
 		  else{
-			  console.log('Found user with name '+ request.param("userid"))// request.body.userid);
-			  /*for (var i = 0; i < result.docs.length; i++) {
-			    console.log('  Doc id: %s', result.docs[i]._id);
-			  }*/			  
-//			  if(!(result.docs[i].password == request.body.password)){
-			  if(!(result.docs[i].password == request.param("password"))){
+			  
+			  console.log('Found user with name '+ request.body.userid)// request.body.userid);
+			  if(!(result.docs[i].password == request.body.password)){
 				  console.log('Incorrect password!!');
 				  response.write('{\"UserExists\":\"True\", \"PWCheck\":\"False\"}');
 				  response.end();

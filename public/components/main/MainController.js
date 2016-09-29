@@ -41,36 +41,23 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
                 }
             }
-
         
-        
-		var res = $http.get('api/searchuser', {
-            params: {
-            	userid: uname,
-            	password: pass
-            }
-        },config);
-
-        res.success(function(data, status, headers, config) {
-        	$scope.assetrecords="";
+        $http.post("/api/searchuser/", userlogindata).success(function(data, status) {
+            //console.log('Data posted successfully');
+            $scope.assetrecords="";
         	$scope.assetrecords = data;
 //        	alert(JSON.stringify(data));
         	if(JSON.stringify(data)=='{"UserExists":"False","PWCheck":"False"}')
         		{
-        		alert('User is not registered');
+        		alert('User is not registered!!');
         		}
         	else if(JSON.stringify(data)=='{"UserExists":"True","PWCheck":"False"}')
         		{
-        		alert('Invalid Password');
+        		alert('Invalid Password!!');
         		}
-        });
-        res.error(function(data, status, headers, config) {
-        	
-            alert( "failure message: " + JSON.stringify({data: data}));
-        });
+          })
         
         
-
 	};
 
 	
