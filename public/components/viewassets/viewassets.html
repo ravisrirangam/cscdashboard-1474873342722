@@ -68,16 +68,16 @@
 				<form name="viewAssetsDetails">
 					<div data-ng-init="fetchassetsdetails()"></div>
 					<div class="col-sm-1"
-						ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'">
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'" style="padding-left: 0px;">
 						<ul class="nav nav-stacked pull-left">
-							<li><a href="{{menu.action}}" style="color: #3366CC;"
+							<li><a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.service_category)">All</a>
 							</li>
 							<li ng-class="{dropdown: menu.menus}"
 								ng-repeat="assetrecord in assetrecords| unique: 'service_category'">
-								<a href="{{menu.action}}" style="color: #3366CC;"
+								<a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.service_category)">{{assetrecord.service_category}}</a>
@@ -86,15 +86,15 @@
 					</div>
 
 					<div class="col-sm-1"
-						ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'">
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'" style="padding-left: 0px;">
 						<ul class="nav nav-stacked pull-left">
-							<li><a href="{{menu.action}}" style="color: #3366CC;"
+							<li><a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
 								data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.industry)">All</a></li>
 							<li ng-class="{dropdown: menu.menus}"
 								ng-repeat="assetrecord in assetrecords| unique: 'industry'">
-								<a href="{{menu.action}}" style="color: #3366CC;"
+								<a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.industry)">{{assetrecord.industry}}</a>
