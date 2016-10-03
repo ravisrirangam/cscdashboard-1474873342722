@@ -1,4 +1,5 @@
-var app = angular.module('reconcile-demo', ['ui.router','ui.router.stateHelper','ngAnimate','ngCookies','ngResource','ngStorage','angularSpinner']);
+var app = angular.module('cscassets-demo', ['ui.router','ui.router.stateHelper','ngAnimate','ngCookies','ngResource','ngStorage','angularSpinner']);
+
 
 /** Start of Configurable constants **/
 app.constant('context', '/cscassets');
@@ -38,9 +39,8 @@ app.config(['stateHelperProvider','$urlRouterProvider','$urlMatcherFactoryProvid
 } ]);
 
 /** Controllers **/
+
 app.controller('MainController', MainController);
-/* app.controller('DashboardController', DashboardController);
-*/
 app.controller('ViewAssetsController', ViewAssetsController);
 app.controller('AddAssetsController', AddAssetsController);
 
@@ -48,7 +48,6 @@ app.controller('AddAssetsController', AddAssetsController);
 /** Services **/
 app.factory('ViewAssets', ViewAssets);
 app.factory('AddAssets', AddAssets);
-//app.factory('DashBoard', DashBoard);
 
 /** Directives **/
 
@@ -63,24 +62,14 @@ app.directive('scrollToTarget', function() {
   };
 });
 
-
-
 app.directive('mcToggleActive', function() {
-	
-		    return {
-	
+		    return {	
 		        link: function(scope, element, attrs) {
-	
 		            element.find('li').on('click', function() {
-	
 		                $(this).addClass('active').siblings().removeClass('active');
-	
 		            });
-	
 		        }
-	
 		    }
-	
 		});
 
 app.filter('unique', function() {
@@ -100,12 +89,6 @@ app.filter('unique', function() {
 	   };
 	});
 
-
-app.controller('dataSetsCtrl', function($scope) {
-	$scope.listdatasetsnames = ["CloudantDB", "Object Storage", "Oracle"];
-});
-
-
 app.directive('jsonText', function() {
 	return {
 		restrict: 'A',
@@ -123,3 +106,21 @@ app.directive('jsonText', function() {
 		}
 	};
 });
+
+app.filter('filterByProperty', function () {
+    /* array is first argument, each addiitonal argument is prefixed by a ":" in filter markup*/
+    return function (dataArray, searchTerm, propertyName) {
+        if (!dataArray) return;
+        /* when term is cleared, return full array*/
+        if (!searchTerm) {
+            return dataArray
+        } else {
+            /* otherwise filter the array */
+            var term = searchTerm.toLowerCase();
+            return dataArray.filter(function (item) {
+                return item[propertyName].toLowerCase().indexOf(term) > -1;
+            });
+        }
+    }
+});
+
