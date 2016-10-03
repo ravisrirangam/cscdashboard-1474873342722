@@ -2,6 +2,12 @@
  * Module dependencies.
  */
 
+
+
+/**
+ * Module dependencies.
+ */
+
 var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path'), fs = require('fs');
 
 var app = express();
@@ -9,6 +15,11 @@ var app = express();
 var cloudant = require('cloudant')('https://512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix:c0f6f2d21676a8b0f6f369cf5076f649ef833da68e518b1b4c0fa79172723a1a@512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix.cloudant.com');
 var db = cloudant.db.use('csc_dashboard');
 var userdb = cloudant.db.use('csc_user');
+
+var localcloudant = require('cloudant')('https://cebb3f76-3e04-43bb-9c4b-f9d8c5ee910c-bluemix:a01e1ae149d22ff94b1183fc854ae8576182d732b0abd3cb2a8430da92ad0dd0@cebb3f76-3e04-43bb-9c4b-f9d8c5ee910c-bluemix.cloudant.com');
+var localdb = localcloudant.db.use('csc_dashboard');
+var localuserdb = localcloudant.db.use('csc_user');
+
 
 
 var bodyParser = require('body-parser');
@@ -29,6 +40,9 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/style', express.static(path.join(__dirname, '/views/style')));
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 
@@ -154,6 +168,8 @@ app.post('/api/searchuser', function(request, response){
 });
 
 
+
+
 app.get('/api/fetchassetsdtls', function(request, response) {
 	
 	var docList = [];
@@ -204,6 +220,72 @@ app.get('/api/fetchassetsdtls', function(request, response) {
 
 	
 });
+
+app.post('/api/adduser', function(req, response) {
+    var userid = req.body.userid;
+    var password = req.body.password;
+    var role = req.body.role;
+    
+    console.log("userid",userid);
+    console.log("password",password);
+    console.log("role",role);
+    
+    
+    localuserdb.insert({ "userid":userid, "password":password,"role": role}, function(err, body) {
+    	  if (err){
+			  	console.log('Add User failed..');
+				response.status(500);
+		        response.setHeader('Content-Type', 'application/json');
+		        response.write('{\"Error\":\"' +err+'\"}');
+		        response.end();
+		        return;
+		  }    	  
+    	  else{
+    		  console.log('Add User Success..');
+    		  response.status(200);
+		      response.setHeader('Content-Type', 'text');
+		      response.write('User Added Successfully !!!');
+		      response.end();
+		      return;
+    	  }
+    		  
+ });
+
+    
+});
+
+app.post('/api/addupdateasset', function(req, response) {
+	console.log(req.body);
+    var title = req.body.title;
+    var link = req.body.link;
+    var service = req.body.service_category;
+    var desc = req.body.description;
+    var createdDate = req.body.created_date;
+    var modifiedDate = req.body.modified_date;
+    var protectedAsset = req.body.protectedAsset;
+    var industry = req.body.industry;
+    
+    localdb.insert({ "_id":title,"titel":title,"link":link,"service_category":service,"description":desc,"created_date":createdDate,"modified_date":modifiedDate,"protected":protectedAsset,"industry":industry}, function(err, body) {
+    	  if (err){
+			  	console.log('Add Asset failed..');
+				response.status(500);
+		        response.setHeader('Content-Type', 'application/json');
+		        response.write('{\"Error\":\"' +err+'\"}');
+		        response.end();
+		        return;
+		  }    	  
+    	  else{
+    		  console.log('Add Aseet Success..');
+    		  response.status(200);
+		      response.setHeader('Content-Type', 'text');
+		      response.write('Asset Added Successfully !!!');
+		      response.end();
+		      return;
+    	  }    		  
+ });    
+});
+
+
 
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {

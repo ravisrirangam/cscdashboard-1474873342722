@@ -1,25 +1,32 @@
+<data-ng-include src="'components/header.html'"></data-ng-include>
+
 <section id="View Assets" class="sections sections-tight">
 	<div class="container">
 		<div class="row">
 			<div class="action-items pull-center">
-				<div class="action-item pull-left" style="margin-left: 0px;">
+				<div class="action-item pull-left">
 					<font size="2">Filter by:</font>
 					<div class="btn-group">
 						<a class="btn btn-info pull-right "
 							style="background-color: transparent;" href="#"
-							data-ui-sref="viewassets"
+							data-ui-sref="viewassets" ng-model="search.industry"
 							ng-click="selectedFilter(assetrecord.industry,'industry')"><font
 							size="1" color="black">Industry</font><span class="glyphicon"
 							aria-hidden="true"></span></a> <a class="btn btn-info pull-right "
 							style="background-color: transparent" href="#"
-							data-ui-sref="viewassets"
+							data-ui-sref="viewassets" ng-model="search.service_category"
 							ng-click="selectedFilter(assetrecord.service_category,'service_category')"><font
 							size="1" color="black">Service Category</font><span
 							class="glyphicon" aria-hidden="true"></span></a>
 					</div>
-
 				</div>
 
+				<div ng-show="privilegeusersoption=='true'">
+					<select ng-model="find.protected" ng-options="privilegeusers for privilegeusers in names"
+						ng-change="selectedusers()">
+						<option value="">-- Privilege User --</option>
+					</select>
+				</div>
 				<div class="action-item pull-right">
 					<font size="2">view as:</font>
 					<div class="btn-group">
@@ -56,105 +63,99 @@
 				</div>
 			</div>
 			<div style="height: 45px; width: 100%"></div>
+
 			<div>
 				<form name="viewAssetsDetails">
-					<div data-ng-init="fetchassetsdetails()">
+					<div data-ng-init="fetchassetsdetails()"></div>
+					<div class="col-sm-1"
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'">
+						<ul class="nav nav-stacked pull-left">
+							<li><a href="{{menu.action}}" style="color: #3366CC;"
+								data-toggle="dropdown" data-ui-sref="viewassets"
+								ng-class="{'dropdown-toggle': menu.menus}"
+								ng-click="filterCategory(assetrecord.service_category)">All</a>
+							</li>
+							<li ng-class="{dropdown: menu.menus}"
+								ng-repeat="assetrecord in assetrecords| unique: 'service_category'">
+								<a href="{{menu.action}}" style="color: #3366CC;"
+								data-toggle="dropdown" data-ui-sref="viewassets"
+								ng-class="{'dropdown-toggle': menu.menus}"
+								ng-click="filterCategory(assetrecord.service_category)">{{assetrecord.service_category}}</a>
+							</li>
+						</ul>
+					</div>
 
-
-						<div class="col-sm-1" style="padding-left: 0px;"
-							ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'">
-
-
-
-							<ul class="nav nav-stacked pull-left">
-
-								<li><a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
-									data-toggle="dropdown" data-ui-sref="viewassets"
-									ng-class="{'dropdown-toggle': menu.menus}"
-									ng-click="filterCategory(assetrecord.service_category)">All</a>
-								</li>
-								<li ng-class="{dropdown: menu.menus}"
-									ng-repeat="assetrecord in assetrecords| unique: 'service_category'">
-									<a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
-									data-toggle="dropdown" data-ui-sref="viewassets"
-									ng-class="{'dropdown-toggle': menu.menus}"
-									ng-click="filterCategory(assetrecord.service_category)">{{assetrecord.service_category}}</a>
-								</li>
-							</ul>
+					<div class="col-sm-1"
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'">
+						<ul class="nav nav-stacked pull-left">
+							<li><a href="{{menu.action}}" style="color: #3366CC;"
+								data-ui-sref="viewassets"
+								ng-class="{'dropdown-toggle': menu.menus}"
+								ng-click="filterCategory(assetrecord.industry)">All</a></li>
+							<li ng-class="{dropdown: menu.menus}"
+								ng-repeat="assetrecord in assetrecords| unique: 'industry'">
+								<a href="{{menu.action}}" style="color: #3366CC;"
+								data-toggle="dropdown" data-ui-sref="viewassets"
+								ng-class="{'dropdown-toggle': menu.menus}"
+								ng-click="filterCategory(assetrecord.industry)">{{assetrecord.industry}}</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-11">
+						<div class="table-responsive" ng-hide="mode==2">
+							<!-- <table class="table table-hover table-striped" ng-show="assetrecords.length > 0"> -->
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th><label class="titletxt" ng-model="find.title">Title</label></th>
+										<th><input type="text" ng-model="find.service_category"
+											id="searchcategory" ng-blur="categoryblur()"
+											style="visibility: hidden; display: none;" /> <label
+											class="categorytxt" ng-model="find.service_category"
+											id="searchcategorylabel">Service Category</label></th>
+										<th><input type="text" ng-model="find.industry"
+											id="searchindustry" ng-blur="industryblur()"
+											style="visibility: hidden; display: none;" /> <label
+											class="industrytxt" ng-model="find.industry"
+											id="searchindustrylabel">Industry</label></th>
+										<th><label class="descriptiontxt"
+											ng-model="find.description">Description</label></th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr ng-repeat="assetrecord in assetrecords | filter:filterType  | orderBy:propertyName:reverse "> -->
+									<tr
+										ng-repeat="assetrecord in assetrecords | filterByProperty:filterType:menuselectedfilter | filter:find | orderBy:propertyName:reverse ">
+										<!-- <tr ng-repeat="assetrecord in assetrecords | filter:find | orderBy:propertyName:reverse "> -->
+										<td><div>
+												<a ng-href={{assetrecord.link}} target="_blank"
+													style="color: #3366CC;">{{ assetrecord.title }}</a>
+											</div></td>
+										<td>{{ assetrecord.service_category }}</td>
+										<td>{{ assetrecord.industry }}</td>
+										<td>{{ assetrecord.description }}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 
-
-						<div class="col-sm-1" style="padding-left: 0px;"
-							ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'">
-
-
-
-							<ul class="nav nav-stacked pull-left">
-
-								<li><a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
-									data-ui-sref="viewassets"
-									ng-class="{'dropdown-toggle': menu.menus}"
-									ng-click="filterCategory(assetrecord.industry)">All</a></li>
-								<li ng-class="{dropdown: menu.menus}"
-									ng-repeat="assetrecord in assetrecords| unique: 'industry'">
-									<a href="{{menu.action}}" style="padding-left: 0px; color: #3366CC;"
-									data-toggle="dropdown" data-ui-sref="viewassets"
-									ng-class="{'dropdown-toggle': menu.menus}"
-									ng-click="filterCategory(assetrecord.industry)">{{assetrecord.industry}}</a>
-								</li>
-							</ul>
-						</div>
-
-
-
-						<div class="col-md-11" style="padding-left: 0px;">
-							<div class="table-responsive" ng-hide="mode==2">
-								<table class="table table-hover table-striped"
-									ng-show="assetrecords.length > 0">
-									<thead>
-										<tr>
-											<th>Title</th>
-											<th>Service Category</th>
-											<th>Industry</th>
-											<th>Description</th>
-
-										</tr>
-									</thead>
-									<tbody>
-										<tr
-											ng-repeat="assetrecord in assetrecords | filter:filterType | orderBy:propertyName:reverse ">
-											<td><div>
-													<a ng-href={{assetrecord.link}} target="_blank"
-														style="color: #3366CC;">{{ assetrecord.title }}</a>
-												</div></td>
-											<td>{{ assetrecord.service_category }}</td>
-											<td>{{ assetrecord.industry }}</td>
-											<td>{{ assetrecord.description }}</td>
-
-										</tr>
-									</tbody>
-								</table>
+						<div
+							ng-repeat-start="assetrecord in assetrecords | filterByProperty:filterType:menuselectedfilter | filter:find | orderBy:propertyName:reverse"
+							ng-class="{'col-md-4':mode==1, 'col-md-3':mode==2}">
+							<div class="well" ng-show="mode==2">
+								<h5 style="margin-top: 0px;">
+									<a ng-href={{assetrecord.link}} target="_blank"
+										style="color: #3366CC;">{{assetrecord.title}}</a>
+								</h5>
+								<b>{{assetrecord.service_category}}</b> <br>
+								<font size="2" color="black">{{assetrecord.industry}}</font> <span
+									ng-if=assetrecord.notTruncated
+									title={{assetrecord.description}}><br>{{assetrecord.description}}</span>
+								<span ng-if=assetrecord.truncated
+									title={{assetrecord.description}}><br>{{assetrecord.truncatedDescription}}</span>
 							</div>
-
-							<div
-								ng-repeat-start="assetrecord in assetrecords | filter:filterType | orderBy:propertyName:reverse"
-								ng-class="{'col-md-4':mode==1, 'col-md-3':mode==2}" style="padding-left: 0px;">
-
-								<div class="well" ng-show="mode==2">
-									<h5 style="margin-top: 0px;">
-										<a ng-href={{assetrecord.link}} target="_blank"
-											style="color: #3366CC;">{{assetrecord.title}}</a>
-									</h5>
-									<b>{{assetrecord.service_category}}</b> <br>
-									<font size="2" color="black">{{assetrecord.industry}}</font> <span
-										ng-if=assetrecord.notTruncated
-										title={{assetrecord.description}}><br>{{assetrecord.description}}</span>
-									<span ng-if=assetrecord.truncated
-										title={{assetrecord.description}}><br>{{assetrecord.truncatedDescription}}</span>
-								</div>
-							</div>
-							<div ng-repeat-end=""></div>
 						</div>
+						<div ng-repeat-end=""></div>
 					</div>
 				</form>
 			</div>

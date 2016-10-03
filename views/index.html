@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" data-ng-app="reconcile-demo">
+<html class="no-js" data-ng-app="cscassets-demo">
    <head>
     <meta charset="utf-8">
     <title>CSC Asset Dashboard</title>
@@ -13,10 +13,10 @@
   </head>
   <body data-ng-controller="MainController">
     <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">You are using a <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <data-ng-include src="'components/header.html'"></data-ng-include>
+       <!-- <data-ng-include src="'components/header.html'"></data-ng-include>     -->
 
     <data-ui-view></data-ui-view>
 
@@ -43,12 +43,8 @@
     <script src="js/lib/angular-mocks.js"></script>
     <script src="js/lib/spin.min.js"></script>
     
-<!--     
-    <script src="plugins/fusioncharts/fusioncharts.js"></script>
-    <script src="plugins/fusioncharts/fusioncharts.charts.js"></script>
-    <script src="plugins/fusioncharts/angular-fusioncharts.min.js"></script>
-    <script src="plugins/canvasjs-1.9.1/canvasjs.min.js"></script>
-     -->
+
+
     <script src="services/services.js"></script>
     
     <script src="components/viewassets/ViewAssetsController.js"></script>
@@ -56,8 +52,7 @@
     <script src="components/viewassets/script.js"></script>
      
     <script src="components/main/MainController.js"></script>
-  <!--  <script src="components/dashboard/DashboardController.js"></script>
-     -->
+     
     <script src="js/app.js"></script>
     <!-- endbuild -->
   </body>
