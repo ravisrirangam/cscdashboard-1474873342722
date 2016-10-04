@@ -272,7 +272,7 @@ app.post('/api/adduser', function(req, response) {
     
 });
 
-app.post('/api/addupdateasset', function(req, response) {
+app.post('/api/addasset', function(req, response) {
 	console.log(req.body);
     var title = req.body.title;
     var link = req.body.link;

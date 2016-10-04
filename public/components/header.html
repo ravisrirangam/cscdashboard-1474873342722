@@ -55,7 +55,7 @@
       <!-- Modal content-->
        <div class="modal-content ">
        <div class="modal-body" style="padding:0px 10px;max-height: 400px;">
-      			<form name="addAssetsForm">
+      		<form name="addAssetsForm">
             <div class="text-center">
                 <h4 style="margin-top: 0px;">Add Asset</h4>
             </div>
@@ -63,7 +63,7 @@
 				<table>
 					<tr>
 						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Link : </span></h4></td>  
-						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.link" ng-model="addAssetsForm.link" style="width: 407px; ></td>
+						<td style="padding-left: 30px;"><input id="link" type="text" name="addAssetsForm.link" ng-model="addAssetsForm.link" style="width: 407px; ></td>
 					<td style="width:220px;color:red" >
                         <div class="caption">	
                             <span >{{addAssetsForm.validlink}}</span>
@@ -81,7 +81,7 @@
 					</tr>				
 					<tr>
 						<td style="padding-left: 30px;"><h4><span class="label label-primary">Asset Title : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.title" ng-model="addAssetsForm.title" style="width: 407px;></td>
+						<td style="padding-left: 30px;"><input type="text" id="title" name="addAssetsForm.title" ng-model="addAssetsForm.title" style="width: 407px;></td>
 						<td style="width:220px;color:red" >
                         <div class="caption">
                             <span >{{addAssetsForm.validtitle}}</span>
@@ -91,7 +91,7 @@
 					</tr>
 					<tr>
 						<td style="padding-left: 30px;"><h4><span class="label label-primary">Industry Group : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.industry" ng-model="addAssetsForm.industry" style="width: 407px;></td>
+						<td style="padding-left: 30px;"><input type="text" id="industry" name="addAssetsForm.industry" ng-model="addAssetsForm.industry" style="width: 407px;></td>
 						<td style="width:220px;color:red" >
                         <div class="caption">
                             <span >{{addAssetsForm.validindustry}}</span>
@@ -101,7 +101,7 @@
 					</tr>
 					<tr>
 						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Service Category : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.category" ng-model="addAssetsForm.category" style="width: 407px;" ></td>
+						<td style="padding-left: 30px;"><input type="text" id="category" name="addAssetsForm.category" ng-model="addAssetsForm.category" style="width: 407px;" ></td>
 												<td style="width:220px;color:red" >
                         <div class="caption">
                             <span >{{addAssetsForm.validcategory}}</span>
@@ -111,7 +111,7 @@
 					</tr>
 					<tr>
 						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Description : </span></h4></td>
-						<td style="padding-left: 30px;"><textarea name="addAssetsForm.description" ng-model="addAssetsForm.description" cols="60" rows="3" ></textarea></td>
+						<td style="padding-left: 30px;"><textarea id="description" name="addAssetsForm.description" ng-model="addAssetsForm.description" cols="60" rows="3" ></textarea></td>
 																		<td style="width:220px;color:red" >
                         <div class="caption">
                             <span >{{addAssetsForm.validdescription}}</span>
@@ -124,11 +124,11 @@
 						<td><input type="file" file-model="addAssetsForm.image"/></td>						
 					</tr>  -->
 					<tr>
-						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Public Asset? : </span></h4></td>
-						<td style="padding-left: 30px;"><select style="width:100px"><option>YES</option><option>NO</option></select></td>						
+						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Protected Asset? : </span></h4></td>
+						<td style="padding-left: 30px;"><select id="isProtected" style="width:100px"><option>YES</option><option>NO</option></select></td>						
 					</tr>  
 					<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
-						<td style="padding-left: 40px;"><a class="btn btn-primary pull-left " href="#" data-ui-sref="addassets" ng-click="addupdateAssets()"  > OK <span class="glyphicon" aria-hidden="true"></span></a></td>
+						<td style="padding-left: 40px;"><a class="btn btn-primary pull-left " href="#" ng-click="addAsset()"  > OK <span class="glyphicon" aria-hidden="true"></span></a></td>
 						<td><button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button></td>					
 				<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->					
 					</tr>

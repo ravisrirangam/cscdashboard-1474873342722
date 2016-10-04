@@ -228,6 +228,139 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
         });
         
 	};
+	
+	$scope.addAsset = function()
+	{
+		
+		var link = angular.element('[id="link"]').val();
+		var title = angular.element('[id="title"]').val();
+		var industry = angular.element('[id="industry"]').val();
+		var category = angular.element('[id="category"]').val();
+		var description = angular.element('[id="description"]').val();
+		var isprotected = angular.element('[id="isProtected"]').val();
+		
+		
+        var adduserdata = JSON.stringify({
+        	link : link,
+        	title: title,
+        	industry : industry,
+        	service_category : category,
+        	description : description,
+        	protectedAsset : isprotected
+        });
+        
+        $http.post("/api/addasset", adduserdata).success(function(data, status) {
+        	alert(data);
+        });
+		
+		/*
+		if($scope.addAssetsForm.link==undefined){
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
 
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+	        alert('save');
+            $scope.stopSpin();
+            $scope.addAssetsForm.validlink="Link is missing";
+                return;
+            }
+		else	if($scope.addAssetsForm.title==undefined){
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
+
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+	        alert('save');
+            $scope.stopSpin();
+            $scope.addAssetsForm.validtitle="Title is missing";
+                return;
+            }
+
+		else	if($scope.addAssetsForm.industry==undefined){
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
+
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+	        alert('save');
+            $scope.stopSpin();
+            $scope.addAssetsForm.validindustry="Industry Group is missing";
+                return;
+            }
+		else	if($scope.addAssetsForm.category==undefined){
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
+
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+	        alert('save');
+            $scope.stopSpin();
+            $scope.addAssetsForm.validcategory="Category is missing";
+                return;
+            }
+		else	if($scope.addAssetsForm.description==undefined){
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
+
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+	        alert('save');
+            $scope.stopSpin();
+            $scope.addAssetsForm.validdescription="Description is missing";
+                return;
+            }
+
+		else{
+			$scope.addAssetsForm.validlink="";
+			$scope.addAssetsForm.validtitle="";
+			$scope.addAssetsForm.validindustry="";
+			$scope.addAssetsForm.validcategory="";
+			$scope.addAssetsForm.validdescription="";
+			
+			var assetdata =$scope.addAssetsForm; 
+
+	        $scope.startSpin();
+	        $scope.spinneractive = true;
+
+			
+	        var res = $http.post('api/addupdateasset', assetdata);
+
+	        res.success(function(data, status, headers, config) {
+	            $scope.message = data;
+	            alert($scope.message.ok)
+	           
+	            $scope.stopSpin();
+	        });
+	        res.error(function(data, status, headers, config) {
+	        	$scope.stopSpin();
+	            alert( "failure message: " + JSON.stringify({data: data}));
+	            
+	        });
+
+			
+			
+				
+		}*/
+		
+		
+		
+		
+	};
 	
 };
