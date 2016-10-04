@@ -39,7 +39,7 @@
 <!-- 	     	<li><a ng-click="viewAsset()" href="#"
 				data-toggle="modal"><span class="glyphicon glyphicon-th-list"></span>
 					View Asset</a></li> 
- -->			<li><a ng-click="modeldialogaddasset()" href="#" data-ui-sref="addassets"
+ -->			<li><a ng-click="modeldialogaddasset()" href=""
 				data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
 					Add Asset</a></li>
 			<li><a ng-click="modeldialogadduser()" href="#" 
@@ -48,6 +48,111 @@
 		</ul>
 	</div>	
 		
+		
+    <div class="modal fade bs-example-modal-sm"  id="addAsset" role="dialog" aria-hidden="false" style="padding:35px 50px;width: auto;height:415px;right:300px;left:300px;margin-top: 60px !important;">
+    <div class="modal-dialog modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+       <div class="modal-content ">
+       <div class="modal-body" style="padding:0px 10px;max-height: 400px;">
+      			<form name="addAssetsForm">
+            <div class="text-center">
+                <h4 style="margin-top: 0px;">Add Asset</h4>
+            </div>
+			<div class="col-md-12" style="padding-top: 15px">
+				<table>
+					<tr>
+						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Link : </span></h4></td>  
+						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.link" ng-model="addAssetsForm.link" style="width: 407px; ></td>
+					<td style="width:220px;color:red" >
+                        <div class="caption">	
+                            <span >{{addAssetsForm.validlink}}</span>
+                        </div>
+                    </td>
+					<td>
+                        <div ng-app="app">
+                            <div class="btn-group">
+                                <a class="disabled btn   pull-left"  ></span></a>
+                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-1" ></span></a>
+                            </div>
+                        </div>
+                    </td>
+						
+					</tr>				
+					<tr>
+						<td style="padding-left: 30px;"><h4><span class="label label-primary">Asset Title : </span></h4></td>
+						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.title" ng-model="addAssetsForm.title" style="width: 407px;></td>
+						<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validtitle}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td style="padding-left: 30px;"><h4><span class="label label-primary">Industry Group : </span></h4></td>
+						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.industry" ng-model="addAssetsForm.industry" style="width: 407px;></td>
+						<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validindustry}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Service Category : </span></h4></td>
+						<td style="padding-left: 30px;"><input type="text" name="addAssetsForm.category" ng-model="addAssetsForm.category" style="width: 407px;" ></td>
+												<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validcategory}}</span>
+                        </div>
+                    </td>
+						
+					</tr>
+					<tr>
+						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Description : </span></h4></td>
+						<td style="padding-left: 30px;"><textarea name="addAssetsForm.description" ng-model="addAssetsForm.description" cols="60" rows="3" ></textarea></td>
+																		<td style="width:220px;color:red" >
+                        <div class="caption">
+                            <span >{{addAssetsForm.validdescription}}</span>
+                        </div>
+                    </td>
+											
+					</tr>
+				<!-- <tr>
+						<td> <h4> <span class="label label-primary">Images : </span></h4></td>
+						<td><input type="file" file-model="addAssetsForm.image"/></td>						
+					</tr>  -->
+					<tr>
+						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Public Asset? : </span></h4></td>
+						<td style="padding-left: 30px;"><select style="width:100px"><option>YES</option><option>NO</option></select></td>						
+					</tr>  
+					<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
+						<td style="padding-left: 40px;"><a class="btn btn-primary pull-left " href="#" data-ui-sref="addassets" ng-click="addupdateAssets()"  > OK <span class="glyphicon" aria-hidden="true"></span></a></td>
+						<td><button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button></td>					
+				<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->					
+					</tr>
+					
+					<td>
+                        <div ng-app="app">
+                            <div class="btn-group">
+                                <a class="disabled btn   pull-left"  ></span></a>
+                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-2" ></span></a>
+                            </div>
+                        </div>
+                    </td>
+										
+				</table>
+			</div>
+			</form>
+        </div>
+ 
+      </div>
+      
+    </div>
+  </div> 
+  
+  
         <div class="modal fade bs-example-modal-sm"  id="addUser" role="dialog" style="padding:35px 50px;width: 180px;height:350px; right:0;left: auto;margin-top: 60px !important;" aria-hidden="false" >
     <div class="modal-dialog modal-dialog modal-sm">
     

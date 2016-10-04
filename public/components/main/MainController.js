@@ -29,8 +29,12 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	};
 	
 	$scope.modeldialogaddasset = function() {		
-		$state.go('addassets');
+		 $("#addAsset").modal();
 	};
+	
+
+	    
+	    
 
 
 //	$scope.addUser = function() {
@@ -53,6 +57,26 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	$scope.modeldialoglogin = function() {		
 		 $("#userLogin").modal();
 	};
+	
+	$scope.modelDialogAddAsset = function () {
+        var addModal = $modal.open({
+            templateUrl: 'addassetss/addassets.html',
+            controller: AssetModalController,
+            resolve: {
+                asset: function () {
+                    return {};
+                },
+                action: function() {
+                    return 'add';
+                }
+            }
+        });
+
+        addModal.result.then(function (asset) {
+            saveAsset(asset);
+        });
+    };
+
 	
 //	$scope.userlogin = function() {
 //
