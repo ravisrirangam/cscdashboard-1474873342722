@@ -230,26 +230,44 @@ app.post('/api/adduser', function(req, response) {
     console.log("password",password);
     console.log("role",role);
     
-    
-    localuserdb.insert({ "userid":userid, "password":password,"role": role}, function(err, body) {
-    	  if (err){
-			  	console.log('Add User failed..');
+    localuserdb.find({selector:{"userid": userid}}, function(er, result) {
+		  if (er) {
+				console.log('selector failed..');
 				response.status(500);
 		        response.setHeader('Content-Type', 'application/json');
-		        response.write('{\"Error\":\"' +err+'\"}');
+		        response.write('{\"Error\":\"' +er+'\"}');
 		        response.end();
 		        return;
-		  }    	  
-    	  else{
-    		  console.log('Add User Success..');
-    		  response.status(200);
-		      response.setHeader('Content-Type', 'text');
-		      response.write('User Added Successfully !!!');
-		      response.end();
-		      return;
-    	  }
-    		  
- });
+			    //throw er;
+			  }	
+	          
+			  if(result.docs.length == 0){
+				  localuserdb.insert({ "userid":userid, "password":password,"role": role}, function(err, body) {
+			    	  if (err){
+						  	console.log('Add User failed..');
+							response.status(500);
+					        response.setHeader('Content-Type', 'application/json');
+					        response.write('{\"Error\":\"' +err+'\"}');
+					        response.end();
+					        return;
+					  }    	  
+			    	  else{
+			    		  console.log('Add User Success..');
+			    		  response.status(200);
+					      response.setHeader('Content-Type', 'text');
+					      response.write('User Added Successfully !!!');
+					      response.end();
+					      return;
+			    	  }
+			  });
+		}else{
+				  console.log('User already exist!!');
+				  response.write('User already exist!!');
+		          response.end();
+		          return;
+				  
+				  }
+  });    
 
     
 });
