@@ -57,7 +57,7 @@ app.post('/api/searchuser', function(request, response){
 	var myDoc;
 	
 	console.log('User id is ..' + request.body.userid);
-	console.log('Password id is ..' + request.body.password);
+	//console.log('Password id is ..' + request.body.password);
 	
 	userdb.find({selector:{"userid": request.body.userid}}, function(er, result) {
 		  if (er) {
@@ -226,9 +226,9 @@ app.post('/api/adduser', function(req, response) {
     var password = req.body.password;
     var role = req.body.role;
     
+    console.log("POST method invoked..Adding user..... ");
     console.log("userid",userid);
-    console.log("password",password);
-    console.log("role",role);
+   
     
     localuserdb.find({selector:{"userid": userid}}, function(er, result) {
 		  if (er) {
@@ -273,6 +273,7 @@ app.post('/api/adduser', function(req, response) {
 });
 
 app.post('/api/addasset', function(req, response) {
+	console.log("POST method invoked..Adding asset..... ");
 	console.log(req.body);
     var title = req.body.title;
     var link = req.body.link;
@@ -303,8 +304,95 @@ app.post('/api/addasset', function(req, response) {
  });    
 });
 
+app.post('/api/updateasset', function(req, response) {
+	console.log("POST method invoked..Updating asset..... ");
+	console.log(req.body);
+      
+    localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+    	 if (!err) {
+    	     //console.log(doc);
+    	     
+    	     
+    	     doc.title = req.body.title;
+    	     doc.link = req.body.link;
+    	     doc.service_category = req.body.service_category;
+    	     doc.description = req.body.description;
+    	     doc.created_date = req.body.created_date;
+    	     doc.modified_date = new Date();
+    	     doc.protected = req.body.protected;
+    	     doc.industry = req.body.industry;
 
+    	     localdb.insert(doc, doc.id, function(err, doc) {
+    	    	 if (err){
+    				  	console.log('Update Asset failed..');
+    					response.status(500);
+    			        response.setHeader('Content-Type', 'application/json');
+    			        response.write('{\"Error\":\"' +err+'\"}');
+    			        response.end();
+    			        return;
+    			  }    	  
+    	    	  else{
+    	    		  console.log('Update Aseet Success..');
+    	    		  response.status(200);
+    			      response.setHeader('Content-Type', 'text');
+    			      response.write('Asset Updated Successfully !!!');
+    			      response.end();
+    			      return;
+    	    	  }    		  
+    	     });
+    	 }
+    	 else{
+    		 console.log("No such document exists!!");
+    		 response.status(500);
+		     response.setHeader('Content-Type', 'application/json');
+		     response.write('{\"Error\":\"' +err+'\"}');
+		     response.end();
+		     return;
+    		 
+    	 }
+    });
+    
 
+});
+
+app.post('/api/deleteasset', function(req, response) {
+	console.log("POST method invoked..Deleting asset..... ");
+	console.log(req.body);
+	
+	localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+   	 if (!err) {
+   		localdb.destroy(doc._id, doc._rev, function(err){
+   			if(!err){
+   				console.log('Delete Aseet Success..');
+	    		  response.status(200);
+			      response.setHeader('Content-Type', 'text');
+			      response.write('Asset Deleted Successfully !!!');
+			      response.end();
+			      return;
+   			} 
+   			else{
+   				console.log('Delete Asset failed..');
+				response.status(500);
+		        response.setHeader('Content-Type', 'application/json');
+		        response.write('{\"Error\":\"' +err+'\"}');
+		        response.end();
+		        return;
+   			}
+   		 });
+   		 
+   	 }
+   	 else{
+   		 console.log('No such document found!');
+   		 response.status(500);
+	     response.setHeader('Content-Type', 'application/json');
+	     response.write('{\"Error\":\"' +err+'\"}');
+	     response.end();
+	     return;
+   		 
+   	 }
+	});
+	
+});
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
 	console.log('Express server listening on port ' + app.get('port'));
