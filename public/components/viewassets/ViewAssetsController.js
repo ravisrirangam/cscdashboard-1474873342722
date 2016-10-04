@@ -224,7 +224,7 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
         });
         
         $http.post("/api/adduser", adduserdata).success(function(data, status) {
-        	alert("User added successfully !!!");
+        	alert(data);
         });
         
 	};
