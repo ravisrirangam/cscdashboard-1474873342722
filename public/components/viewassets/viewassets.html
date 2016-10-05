@@ -21,10 +21,10 @@
 					</div>
 				</div>
 
-				<div ng-show="privilegeusersoption=='true'">
+				<div ng-show="privilegeusersoption=='true'" class="action-item pull-left">
 					<select ng-model="find.protected"
 						ng-options="privilegeoption for (privilegeoption, privilegevalue) in privilegeusersopt"
-						ng-change="selectedusers()">
+						ng-change="selectedusers()" style="margin-top: 5px;">
 						<option value="">-- Assets URL --</option>
 					</select>
 				</div>
@@ -34,11 +34,11 @@
 						<ul class="nav nav-pills pull-right">
 							<li ng-class="{'active':mode==1}" title="list"><a href="#"
 								data-ui-sref="viewassets" ng-click="mode=1" class="btn btn-info"
-								style="background-color: transparent; color: #3366CC;"><span
+								style="background-color: transparent; color: #3366CC; padding-left: 10px; padding-right: 10px;"><span
 									class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
 							<li ng-class="{'active':mode==2}" title="thumbs"><a href="#"
 								data-ui-sref="viewassets" ng-click="mode=2" class="btn btn-info"
-								style="background-color: transparent; color: #3366CC;"><span
+								style="background-color: transparent; color: #3366CC; padding-left: 10px; padding-right: 10px;"><span
 									class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
 						</ul>
 					</div>
@@ -108,7 +108,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-11" style="padding-left: 0px; padding-right: 0px;">
 						<div class="table-responsive" ng-hide="mode==2">
 							<!-- <table class="table table-hover table-striped" ng-show="assetrecords.length > 0"> -->
 							<table class="table table-hover table-striped">
@@ -141,13 +141,13 @@
 										<td>{{ assetrecord.service_category }}</td>
 										<td>{{ assetrecord.industry }}</td>
 										<td>{{ assetrecord.description }}</td>
-										<td>
+										<td style="padding-left: 0px;">
 											<div class="dropdown" id="updatedeletemodel">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 													<span class="glyphicon glyphicon-cog"></span>
 												</a>
 												<ul class="dropdown-menu" role="menu"
-													aria-labelledby="dLabel">
+													aria-labelledby="dLabel" style="min-width:60px">
 													<li role="presentation"><a
 														ng-click="updateAssets(assetrecord)">edit</a></li>
 													<li role="presentation"><a
@@ -179,7 +179,7 @@
 								<br>
 								<div class="dropdown" id="updatedeletemodel">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="glyphicon glyphicon-cog"></span>
+										<span class="glyphicon glyphicon-cog" style="padding-top: 15px;"></span>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 										<li role="presentation"><a ng-click="updateAssets(assetrecord)">edit</a></li>

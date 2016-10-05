@@ -94,9 +94,9 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	$scope.fetchdescription = function(assetdetails) {
 		for (var i = 0; i < assetdetails.length; i++) {
 			var description = assetdetails[i].description;
-			if (description != undefined && description.length > 70) {
+			if (description != undefined && description.length > 55) {
 				$scope.assetrecords[i].truncatedDescription = description
-						.substring(0, 70)
+						.substring(0, 55)
 						+ "...";
 				$scope.truncated = true;
 				$scope.assetrecords[i].truncated = true;
