@@ -376,4 +376,16 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		};
 
 	
+$scope.updateAssets = function(assetrecord)
+{
+	alert('link value is : ' + assetrecord.link)
+}
+
+
+$scope.deleteAssets = function(assetrecord)
+{
+	alert('link will be deleted : ' + assetrecord.link)
+}
+		
+		
 };
