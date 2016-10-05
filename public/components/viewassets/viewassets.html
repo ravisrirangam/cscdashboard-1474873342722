@@ -25,11 +25,11 @@
 					<select ng-model="find.protected"
 						ng-options="privilegeoption for (privilegeoption, privilegevalue) in privilegeusersopt"
 						ng-change="selectedusers()" style="margin-top: 5px;">
-						<option value="">-- Assets URL --</option>
+						<option value="">--  Assets  --</option>
 					</select>
 				</div>
 				<div class="action-item pull-right">
-					<font size="2">view as:</font>
+					<font size="2">View as:</font>
 					<div class="btn-group">
 						<ul class="nav nav-pills pull-right">
 							<li ng-class="{'active':mode==1}" title="list"><a href="#"
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div class="action-item pull-right">
-					<font size="2">sort by:</font>
+					<font size="2">Sort by:</font>
 					<div class="btn-group">
 						<a class="btn btn-info pull-right "
 							style="background-color: transparent" href="#"
@@ -149,9 +149,9 @@
 												<ul class="dropdown-menu" role="menu"
 													aria-labelledby="dLabel" style="min-width:60px">
 													<li role="presentation"><a
-														ng-click="updateAssets(assetrecord)">edit</a></li>
+														ng-click="updateAssets(assetrecord)">Edit</a></li>
 													<li role="presentation"><a
-														ng-click="deleteAssets(assetrecord)">delete</a></li>
+														ng-click="deleteAssets(assetrecord)">Delete</a></li>
 												</ul>
 											</div>
 
@@ -182,8 +182,8 @@
 										<span class="glyphicon glyphicon-cog" style="padding-top: 15px;"></span>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-										<li role="presentation"><a ng-click="updateAssets(assetrecord)">edit</a></li>
-										<li role="presentation"><a ng-click="deleteAssets(assetrecord)">delete</a></li>
+										<li role="presentation"><a ng-click="updateAssets(assetrecord)">Edit</a></li>
+										<li role="presentation"><a ng-click="deleteAssets(assetrecord)">Delete</a></li>
 									</ul>
 								</div>
 
