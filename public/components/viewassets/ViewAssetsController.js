@@ -395,7 +395,7 @@ $scope.deleteAssets = function(assetrecord)
         });
         res.error(function(data, status, headers, config) {
         	$scope.stopSpin();
-            alert( "Failure message: " + JSON.stringify({data: data}));
+            alert( "Failed to delete the asset\n Info:  " + JSON.stringify(data));
             
         });
     }
