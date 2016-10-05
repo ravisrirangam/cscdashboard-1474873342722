@@ -215,12 +215,10 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	$scope.addUser = function() {
 		var uname = angular.element('[id="username1"]').val();
 		var pass = angular.element('[id="password1"]').val();
-		var userrole = angular.element('[id="role"]').val();
 		
         var adduserdata = JSON.stringify({
         	userid: uname,
-        	password: pass,
-        	role: userrole
+        	password: pass
         });
         
         $http.post("/api/adduser", adduserdata).success(function(data, status) {

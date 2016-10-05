@@ -242,7 +242,7 @@ app.post('/api/adduser', function(req, response) {
 			  }	
 	          
 			  if(result.docs.length == 0){
-				  localuserdb.insert({ "userid":userid, "password":password,"role": role}, function(err, body) {
+				  localuserdb.insert({ "userid":userid, "password":password}, function(err, body) {
 			    	  if (err){
 						  	console.log('Add User failed..');
 							response.status(500);
