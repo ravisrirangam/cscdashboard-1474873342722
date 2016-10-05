@@ -1,7 +1,7 @@
 'use strict';
 
 var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
-		$rootScope) {
+		$rootScope ) {
 
 	
 	$scope.loggedIn = false;
@@ -382,7 +382,23 @@ $scope.updateAssets = function(assetrecord)
 
 $scope.deleteAssets = function(assetrecord)
 {
-	alert('link will be deleted : ' + assetrecord.link)
+	//alert('link will be deleted : ' + assetrecord.link)
+	var	deleteAssetAns = $window.confirm('Are you sure you want to delete the Asset?');
+    if(deleteAssetAns){
+     //Your action will goes here
+    	var res = $http.post('api/deleteasset', JSON.stringify({title:assetrecord.title}));
+
+        res.success(function(data, status, headers, config) {
+            $scope.successmessage = data;
+            $window.alert($scope.successmessage);          
+            $scope.stopSpin();
+        });
+        res.error(function(data, status, headers, config) {
+        	$scope.stopSpin();
+            alert( "Failure message: " + JSON.stringify({data: data}));
+            
+        });
+    }
 }
 		
 		
