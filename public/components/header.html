@@ -204,6 +204,157 @@
 		</div>
 
 
+
+		<div class="modal fade bs-example-modal-sm" id="modifyAsset"
+			role="dialog" aria-hidden="false"
+			style="padding: 35px 50px; width: auto; height: 415px; right: 300px; left: 300px; margin-top: 60px !important;">
+			<div class="modal-dialog modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content ">
+					<div class="modal-body"
+						style="padding: 0px 10px; max-height: 400px;">
+						
+							<div class="text-center">
+								<h4 style="margin-top: 0px;">Modify Asset</h4>
+							</div>
+							<div class="col-md-12" style="padding-top: 15px">
+								<table>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Link : </span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><input id="link"
+											type="text" name="link"
+											ng-model="link"
+											style="width: 407px; ></td>
+					<td style="width:220px;color:red" >
+											<div class="caption">
+												<span>{{validlink}}</span>
+											</div></td>
+										<td>
+											<div ng-app="app">
+												<div class="btn-group">
+													<a class="disabled btn   pull-left"></span></a> <a><span
+														us-spinner="{radius:15, width:4, length: 8}"
+														spinner-key="spinner-1"></span></a>
+												</div>
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;"><h4>
+												<span class="label label-primary">Asset Title : </span>
+											</h4></td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="title" name="title"
+											ng-model="title"
+											style="width: 407px;></td>
+						<td style="width:220px;color:red" >
+											<div class="caption">
+												<span>{{validtitle}}</span>
+											</div></td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;"><h4>
+												<span class="label label-primary">Industry Group : </span>
+											</h4></td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="industry" name="industry"
+											ng-model="industry"
+											style="width: 407px;></td>
+						<td style="width:220px;color:red" >
+											<div class="caption">
+												<span>{{validindustry}}</span>
+											</div></td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Service Category :
+												</span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="category" name="category"
+											ng-model="category" style="width: 407px;"></td>
+										<td style="width: 220px; color: red">
+											<div class="caption">
+												<span>{{validcategory}}</span>
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Description : </span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><textarea
+												id="description" name="description"
+												ng-model="description" cols="60" rows="3"></textarea></td>
+										<td style="width: 220px; color: red">
+											<div class="caption">
+												<span>{{validdescription}}</span>
+											</div>
+										</td>
+
+									</tr>
+									<!-- <tr>
+						<td> <h4> <span class="label label-primary">Images : </span></h4></td>
+						<td><input type="file" file-model="image"/></td>						
+					</tr>  -->
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Protected Asset? :
+												</span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><select id="isProtected"
+											style="width: 100px"><option>YES</option>
+												<option>NO</option></select></td>
+									</tr>
+									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
+										<td style="padding-left: 40px;"><a
+											class="btn btn-primary pull-left " href="#"
+											ng-click="modifyAsset(link,title,industry,category,description,selectedItemvalue)"> OK <span class="glyphicon"
+												aria-hidden="true"></span></a></td>
+										<td><button type="submit"
+												class="btn btn-danger btn-default pull-right"
+												data-dismiss="modal">
+												<span class="glyphicon glyphicon-remove"></span> Cancel
+											</button></td>
+										<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->
+									</tr>
+
+									<td>
+										<div ng-app="app">
+											<div class="btn-group">
+												<a class="disabled btn   pull-left"></span></a> <a><span
+													us-spinner="{radius:15, width:4, length: 8}"
+													spinner-key="spinner-2"></span></a>
+											</div>
+										</div>
+									</td>
+
+								</table>
+							</div>
+						
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+
 		<div class="modal fade bs-example-modal-sm" id="addUser" role="dialog"
 			style="padding: 35px 50px; width: 180px; height: 350px; right: 0; left: auto; margin-top: 60px !important;"
 			aria-hidden="false">

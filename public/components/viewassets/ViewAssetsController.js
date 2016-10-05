@@ -400,6 +400,46 @@ $scope.deleteAssets = function(assetrecord)
         });
     }
 }
-		
+
+
+$scope.updateAssets = function(assetrecord)
+{
+	
+	
+	
+	$scope.link=assetrecord.link;
+	$scope.title=assetrecord.title;
+	$scope.industry=assetrecord.industry;
+	$scope.category=assetrecord.service_category;
+	$scope.description=assetrecord.description;
+	$scope.selectedItemvalue=assetrecord.protected.toUpperCase();
+
+	
+	
+	$("#modifyAsset").modal();
+}
+
+$scope.modifyAsset = function(link,title,industry,category,description,selectedItemvalue){
+	
+	var usermodifydata = JSON.stringify({
+		title : title,
+		link : link,
+		service_category : category,
+		description : description,
+		protected : selectedItemvalue,
+		industry : industry
+	});
+	
+
+	
+	$http
+	.post("/api/updateasset", usermodifydata)
+	.success(
+			function(data, status) {
+				alert('data : ' + data );
+				alert('status : ' + status);
+			});
+}
+
 		
 };
