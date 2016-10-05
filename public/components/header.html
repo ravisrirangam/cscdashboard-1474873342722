@@ -13,198 +13,266 @@
 				style="display: inline-block; top: 10%; left: 40%; position: absolute;">
 				<h4>
 					<font size="5" color="white">Asset Dashboard</font>
-					
+
 				</h4>
 			</div>
-			
+
 		</div>
 		</p>
 		<!-- /.navbar-collapse -->
-		
-		
-		
-		
- 		    <div ng-hide="loggedIn">
-    <ul class="nav navbar-nav navbar-right">
-			<li></li>
-			<li><a ng-click="modeldialoglogin()" href="#"
-				data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span>
-					Login</a></li>
-		</ul>
-	</div>
- 	
-	<div ng-show="loggedIn">
-      
-	 <ul class="nav navbar-nav navbar-right">
-<!-- 	     	<li><a ng-click="viewAsset()" href="#"
+
+
+
+
+		<div ng-hide="loggedIn">
+			<ul class="nav navbar-nav navbar-right">
+				<li></li>
+				<li><a ng-click="modeldialoglogin()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span>
+						Login</a></li>
+			</ul>
+		</div>
+
+		<div ng-show="loggedIn">
+
+			<ul class="nav navbar-nav navbar-right">
+				<!-- 	     	<li><a ng-click="viewAsset()" href="#"
 				data-toggle="modal"><span class="glyphicon glyphicon-th-list"></span>
 					View Asset</a></li> 
- -->			<li><a ng-click="modeldialogaddasset()" href=""
-				data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
-					Add Asset</a></li>
-			<li><a ng-click="modeldialogadduser()" href="#" 
-				data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
-					Add User</a></li>
-		</ul>
-	</div>	
-		
-		
-    <div class="modal fade bs-example-modal-sm"  id="addAsset" role="dialog" aria-hidden="false" style="padding:35px 50px;width: auto;height:415px;right:300px;left:300px;margin-top: 60px !important;">
-    <div class="modal-dialog modal-dialog modal-sm">
-    
-      <!-- Modal content-->
-       <div class="modal-content ">
-       <div class="modal-body" style="padding:0px 10px;max-height: 400px;">
-      		<form name="addAssetsForm">
-            <div class="text-center">
-                <h4 style="margin-top: 0px;">Add Asset</h4>
-            </div>
-			<div class="col-md-12" style="padding-top: 15px">
-				<table>
-					<tr>
-						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Link : </span></h4></td>  
-						<td style="padding-left: 30px;"><input id="link" type="text" name="addAssetsForm.link" ng-model="addAssetsForm.link" style="width: 407px; ></td>
+ -->
+				<li><a ng-click="modeldialogaddasset()" href=""
+					data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
+						Add Asset</a></li>
+				<li><a ng-click="modeldialogadduser()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
+						Add User</a></li>
+				<li><a ng-click="modeldialoglogout()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-log-out"></span>
+						Logout</a></li>
+
+			</ul>
+		</div>
+
+
+		<div class="modal fade bs-example-modal-sm" id="addAsset"
+			role="dialog" aria-hidden="false"
+			style="padding: 35px 50px; width: auto; height: 415px; right: 300px; left: 300px; margin-top: 60px !important;">
+			<div class="modal-dialog modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content ">
+					<div class="modal-body"
+						style="padding: 0px 10px; max-height: 400px;">
+						<form name="addAssetsForm">
+							<div class="text-center">
+								<h4 style="margin-top: 0px;">Add Asset</h4>
+							</div>
+							<div class="col-md-12" style="padding-top: 15px">
+								<table>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Link : </span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><input id="link"
+											type="text" name="addAssetsForm.link"
+											ng-model="addAssetsForm.link"
+											style="width: 407px; ></td>
 					<td style="width:220px;color:red" >
-                        <div class="caption">	
-                            <span >{{addAssetsForm.validlink}}</span>
-                        </div>
-                    </td>
-					<td>
-                        <div ng-app="app">
-                            <div class="btn-group">
-                                <a class="disabled btn   pull-left"  ></span></a>
-                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-1" ></span></a>
-                            </div>
-                        </div>
-                    </td>
-						
-					</tr>				
-					<tr>
-						<td style="padding-left: 30px;"><h4><span class="label label-primary">Asset Title : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" id="title" name="addAssetsForm.title" ng-model="addAssetsForm.title" style="width: 407px;></td>
+											<div class="caption">
+												<span>{{addAssetsForm.validlink}}</span>
+											</div></td>
+										<td>
+											<div ng-app="app">
+												<div class="btn-group">
+													<a class="disabled btn   pull-left"></span></a> <a><span
+														us-spinner="{radius:15, width:4, length: 8}"
+														spinner-key="spinner-1"></span></a>
+												</div>
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;"><h4>
+												<span class="label label-primary">Asset Title : </span>
+											</h4></td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="title" name="addAssetsForm.title"
+											ng-model="addAssetsForm.title"
+											style="width: 407px;></td>
 						<td style="width:220px;color:red" >
-                        <div class="caption">
-                            <span >{{addAssetsForm.validtitle}}</span>
-                        </div>
-                    </td>
-						
-					</tr>
-					<tr>
-						<td style="padding-left: 30px;"><h4><span class="label label-primary">Industry Group : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" id="industry" name="addAssetsForm.industry" ng-model="addAssetsForm.industry" style="width: 407px;></td>
+											<div class="caption">
+												<span>{{addAssetsForm.validtitle}}</span>
+											</div></td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;"><h4>
+												<span class="label label-primary">Industry Group : </span>
+											</h4></td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="industry" name="addAssetsForm.industry"
+											ng-model="addAssetsForm.industry"
+											style="width: 407px;></td>
 						<td style="width:220px;color:red" >
-                        <div class="caption">
-                            <span >{{addAssetsForm.validindustry}}</span>
-                        </div>
-                    </td>
-						
-					</tr>
-					<tr>
-						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Service Category : </span></h4></td>
-						<td style="padding-left: 30px;"><input type="text" id="category" name="addAssetsForm.category" ng-model="addAssetsForm.category" style="width: 407px;" ></td>
-												<td style="width:220px;color:red" >
-                        <div class="caption">
-                            <span >{{addAssetsForm.validcategory}}</span>
-                        </div>
-                    </td>
-						
-					</tr>
-					<tr>
-						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Description : </span></h4></td>
-						<td style="padding-left: 30px;"><textarea id="description" name="addAssetsForm.description" ng-model="addAssetsForm.description" cols="60" rows="3" ></textarea></td>
-																		<td style="width:220px;color:red" >
-                        <div class="caption">
-                            <span >{{addAssetsForm.validdescription}}</span>
-                        </div>
-                    </td>
-											
-					</tr>
-				<!-- <tr>
+											<div class="caption">
+												<span>{{addAssetsForm.validindustry}}</span>
+											</div></td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Service Category :
+												</span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><input type="text"
+											id="category" name="addAssetsForm.category"
+											ng-model="addAssetsForm.category" style="width: 407px;"></td>
+										<td style="width: 220px; color: red">
+											<div class="caption">
+												<span>{{addAssetsForm.validcategory}}</span>
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Description : </span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><textarea
+												id="description" name="addAssetsForm.description"
+												ng-model="addAssetsForm.description" cols="60" rows="3"></textarea></td>
+										<td style="width: 220px; color: red">
+											<div class="caption">
+												<span>{{addAssetsForm.validdescription}}</span>
+											</div>
+										</td>
+
+									</tr>
+									<!-- <tr>
 						<td> <h4> <span class="label label-primary">Images : </span></h4></td>
 						<td><input type="file" file-model="addAssetsForm.image"/></td>						
 					</tr>  -->
-					<tr>
-						<td style="padding-left: 30px;"> <h4> <span class="label label-primary">Protected Asset? : </span></h4></td>
-						<td style="padding-left: 30px;"><select id="isProtected" style="width:100px"><option>YES</option><option>NO</option></select></td>						
-					</tr>  
-					<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
-						<td style="padding-left: 40px;"><a class="btn btn-primary pull-left " href="#" ng-click="addAsset()"  > OK <span class="glyphicon" aria-hidden="true"></span></a></td>
-						<td><button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button></td>					
-				<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->					
-					</tr>
-					
-					<td>
-                        <div ng-app="app">
-                            <div class="btn-group">
-                                <a class="disabled btn   pull-left"  ></span></a>
-                                <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-2" ></span></a>
-                            </div>
-                        </div>
-                    </td>
-										
-				</table>
+									<tr>
+										<td style="padding-left: 30px;">
+											<h4>
+												<span class="label label-primary">Protected Asset? :
+												</span>
+											</h4>
+										</td>
+										<td style="padding-left: 30px;"><select id="isProtected"
+											style="width: 100px"><option>YES</option>
+												<option>NO</option></select></td>
+									</tr>
+									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
+										<td style="padding-left: 40px;"><a
+											class="btn btn-primary pull-left " href="#"
+											ng-click="addAsset()"> OK <span class="glyphicon"
+												aria-hidden="true"></span></a></td>
+										<td><button type="submit"
+												class="btn btn-danger btn-default pull-right"
+												data-dismiss="modal">
+												<span class="glyphicon glyphicon-remove"></span> Cancel
+											</button></td>
+										<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->
+									</tr>
+
+									<td>
+										<div ng-app="app">
+											<div class="btn-group">
+												<a class="disabled btn   pull-left"></span></a> <a><span
+													us-spinner="{radius:15, width:4, length: 8}"
+													spinner-key="spinner-2"></span></a>
+											</div>
+										</div>
+									</td>
+
+								</table>
+							</div>
+						</form>
+					</div>
+
+				</div>
+
 			</div>
-			</form>
-        </div>
- 
-      </div>
-      
-    </div>
-  </div> 
-  
-  
-        <div class="modal fade bs-example-modal-sm"  id="addUser" role="dialog" style="padding:35px 50px;width: 180px;height:350px; right:0;left: auto;margin-top: 60px !important;" aria-hidden="false" >
-    <div class="modal-dialog modal-dialog modal-sm">
-    
-      <!-- Modal content-->
-       <div class="modal-content ">
-<!--         <div class="modal-header" style="padding:0px 10px;">
+		</div>
+
+
+		<div class="modal fade bs-example-modal-sm" id="addUser" role="dialog"
+			style="padding: 35px 50px; width: 180px; height: 350px; right: 0; left: auto; margin-top: 60px !important;"
+			aria-hidden="false">
+			<div class="modal-dialog modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content ">
+					<!--         <div class="modal-header" style="padding:0px 10px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4><span class="glyphicon glyphicon-lock"></span> Add User</h4>
         </div>
-     -->     <div class="modal-body" style="padding:0px 10px;max-height: 400px;">
-          <form role="form">
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> UserId</label>
-              <input type="text" class="form-control" id="username1" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" id="password1" placeholder="Enter password">
-            </div >
-            <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon glyphicon-education"></span> Role</label>
-              <input type="text" class="form-control" id="role" placeholder="Admin">
-            </div >
-              <button style="background-color: #3366CC;"  type="submit" class="btn btn-success btn-block" ng-click="addUser()"><span class="glyphicon glyphicon-plus"></span> Add User</button>
-          </form>
-        </div>
-         <div class="modal-footer" style="padding:0px 10px;">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          
-<!--            <br>
+     -->
+					<div class="modal-body"
+						style="padding: 0px 10px; max-height: 400px;">
+						<form role="form">
+							<div class="form-group">
+								<label for="usrname"><span
+									class="glyphicon glyphicon-user"></span> UserId</label> <input
+									type="text" class="form-control" id="username1"
+									placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon-eye-open"></span> Password</label> <input
+									type="password" class="form-control" id="password1"
+									placeholder="Enter password">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon glyphicon-education"></span> Role</label> <input
+									type="text" class="form-control" id="role" placeholder="Admin">
+							</div>
+							<button style="background-color: #3366CC;" type="submit"
+								class="btn btn-success btn-block" ng-click="addUser()">
+								<span class="glyphicon glyphicon-plus"></span> Add User
+							</button>
+						</form>
+					</div>
+					<div class="modal-footer" style="padding: 0px 10px;">
+						<button type="submit" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Cancel
+						</button>
+
+						<!--            <br>
           <p>New User<a href="#">Sign Up</a></p>
           <br>
           <p>Forgot<a href="#">Password?</a></p>
-   -->     </div>
-      </div>
-      
-    </div>
-  </div> 
-		
-		
-		
-		
-		
-		
-<!-- 		<ul class="nav navbar-nav navbar-right">
+   -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- 		<ul class="nav navbar-nav navbar-right">
 			<li><a ng-click="modeldialoglogin()" href="#"
 				data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span>
 					pre Login</a></li>
 		</ul>
- -->		<div class="modal fade bs-example-modal-sm" id="userLogin"
+ -->
+		<div class="modal fade bs-example-modal-sm" id="userLogin"
 			role="dialog"
-			style="padding: 35px 50px; width: 180px; height: 270px; right:0; left: auto; margin-top: 60px !important;"
+			style="padding: 35px 50px; width: 180px; height: 270px; right: 0; left: auto; margin-top: 60px !important;"
 			aria-hidden="false">
 			<div class="modal-dialog modal-dialog modal-sm">
 				<!-- Modal content-->
@@ -229,8 +297,8 @@
 								class="btn btn-success btn-block" ng-click="privilegeduser()">
 								<span class="glyphicon glyphicon-off"></span> Login
 							</button>
-							
-							
+
+
 						</form>
 					</div>
 					<div class="modal-footer" style="padding: 0px 10px;">
@@ -240,10 +308,11 @@
 						</button>
 					</div>
 					<!-- <span us-spinner></span> -->
-									 <a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-1" ></span></a>
-					
+					<a><span us-spinner="{radius:15, width:4, length: 8}"
+						spinner-key="spinner-1"></span></a>
+
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

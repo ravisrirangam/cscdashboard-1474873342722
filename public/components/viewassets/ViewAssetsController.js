@@ -363,4 +363,17 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		
 	};
 	
+	$scope.privilegeusersopt = {Public : "no",
+			Private : "yes",
+			All : "All"
+		};
+
+	$scope.modeldialoglogout = function() {
+		var backlen = history.length;
+	    history.go(-backlen);
+	    
+	    window.location.replace("/");
+		};
+
+	
 };

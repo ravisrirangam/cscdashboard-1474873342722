@@ -22,9 +22,10 @@
 				</div>
 
 				<div ng-show="privilegeusersoption=='true'">
-					<select ng-model="find.protected" ng-options="privilegeusers for privilegeusers in names"
+					<select ng-model="find.protected"
+						ng-options="privilegeoption for (privilegeoption, privilegevalue) in privilegeusersopt"
 						ng-change="selectedusers()">
-						<option value="">-- Privilege User --</option>
+						<option value="">-- Assets URL --</option>
 					</select>
 				</div>
 				<div class="action-item pull-right">
@@ -68,16 +69,19 @@
 				<form name="viewAssetsDetails">
 					<div data-ng-init="fetchassetsdetails()"></div>
 					<div class="col-sm-1"
-						ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'" style="padding-left: 0px;">
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='service_category'"
+						style="padding-left: 0px;">
 						<ul class="nav nav-stacked pull-left">
-							<li><a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
+							<li><a href="{{menu.action}}"
+								style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.service_category)">All</a>
 							</li>
 							<li ng-class="{dropdown: menu.menus}"
 								ng-repeat="assetrecord in assetrecords| unique: 'service_category'">
-								<a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
+								<a href="{{menu.action}}"
+								style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.service_category)">{{assetrecord.service_category}}</a>
@@ -86,15 +90,18 @@
 					</div>
 
 					<div class="col-sm-1"
-						ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'" style="padding-left: 0px;">
+						ng-show="assetrecords.length > 0 && menuselectedfilter=='industry'"
+						style="padding-left: 0px;">
 						<ul class="nav nav-stacked pull-left">
-							<li><a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
+							<li><a href="{{menu.action}}"
+								style="color: #3366CC; padding-left: 5px;"
 								data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.industry)">All</a></li>
 							<li ng-class="{dropdown: menu.menus}"
 								ng-repeat="assetrecord in assetrecords| unique: 'industry'">
-								<a href="{{menu.action}}" style="color: #3366CC; padding-left: 5px;"
+								<a href="{{menu.action}}"
+								style="color: #3366CC; padding-left: 5px;"
 								data-toggle="dropdown" data-ui-sref="viewassets"
 								ng-class="{'dropdown-toggle': menu.menus}"
 								ng-click="filterCategory(assetrecord.industry)">{{assetrecord.industry}}</a>
@@ -134,6 +141,22 @@
 										<td>{{ assetrecord.service_category }}</td>
 										<td>{{ assetrecord.industry }}</td>
 										<td>{{ assetrecord.description }}</td>
+										<td>
+											<div class="dropdown" id="updatedeletemodel">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+													<span class="glyphicon glyphicon-cog"></span>
+												</a>
+												<ul class="dropdown-menu" role="menu"
+													aria-labelledby="dLabel">
+													<li role="presentation"><a
+														ng-click="updateAssets(assetrecord)">edit</a></li>
+													<li role="presentation"><a
+														ng-click="deleteAssets(assetrecord)">delete</a></li>
+												</ul>
+											</div>
+
+										</td>
+
 									</tr>
 								</tbody>
 							</table>
@@ -147,12 +170,23 @@
 									<a ng-href={{assetrecord.link}} target="_blank"
 										style="color: #3366CC;">{{assetrecord.title}}</a>
 								</h5>
-								<b>{{assetrecord.service_category}}</b> <br>
-								<font size="2" color="black">{{assetrecord.industry}}</font> <span
+								<b>{{assetrecord.service_category}}</b> <br> <font size="2"
+									color="black">{{assetrecord.industry}}</font> <span
 									ng-if=assetrecord.notTruncated
 									title={{assetrecord.description}}><br>{{assetrecord.description}}</span>
 								<span ng-if=assetrecord.truncated
 									title={{assetrecord.description}}><br>{{assetrecord.truncatedDescription}}</span>
+								<br>
+								<div class="dropdown" id="updatedeletemodel">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<span class="glyphicon glyphicon-cog"></span>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<li role="presentation"><a ng-click="updateAssets(assetrecord)">edit</a></li>
+										<li role="presentation"><a ng-click="deleteAssets(assetrecord)">delete</a></li>
+									</ul>
+								</div>
+
 							</div>
 						</div>
 						<div ng-repeat-end=""></div>
