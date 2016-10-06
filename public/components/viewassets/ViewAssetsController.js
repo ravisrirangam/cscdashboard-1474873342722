@@ -119,6 +119,7 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	};
 	$scope.filterCategory = function(filtername) {
 		$scope.filterType = filtername;
+		
 		$scope.find.service_category = "";
 		$scope.find.industry = "";
 	}
@@ -309,7 +310,7 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	};
 	
 	$scope.privilegeusersopt = {Public : "no",
-			Private : "yes",
+			Protected : "yes",
 			All : "All"
 		};
 
