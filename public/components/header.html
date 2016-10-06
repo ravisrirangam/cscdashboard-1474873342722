@@ -83,7 +83,7 @@
 											<div class="caption">
 												<span>{{addAssetsForm.validlink}}</span>
 											</div></td>
-										<td>
+<!-- 										<td>
 											<div ng-app="app">
 												<div class="btn-group">
 													<a class="disabled btn   pull-left"></span></a> <a><span
@@ -92,7 +92,7 @@
 												</div>
 											</div>
 										</td>
-
+ -->
 									</tr>
 									<tr>
 										<td style="padding-left: 30px;"><h4>
@@ -112,7 +112,7 @@
 										<td style="padding-left: 30px;"><h4>
 												<span class="label label-primary">Industry Group : </span>
 											</h4></td>
-										<td style="padding-left: 30px;"><input type="text"
+<!-- 										<td style="padding-left: 30px;"><input type="text"
 											id="industry" name="addAssetsForm.industry"
 											ng-model="addAssetsForm.industry"
 											style="width: 407px;></td>
@@ -120,7 +120,18 @@
 											<div class="caption">
 												<span>{{addAssetsForm.validindustry}}</span>
 											</div></td>
-
+ -->
+ 
+ 										<td style="padding-left: 30px;"><select id="industry"
+											style="width: 100px"><option>Insurance</option>
+												<option>Banking</option>
+												<option>Travel and Transport</option>
+												<option>Demo</option>
+												<option>Retail</option>
+												<option>Manufacturing</option>
+												<option>Healthcare</option>
+												<option>Energy</option></select></td>
+ 
 									</tr>
 									<tr>
 										<td style="padding-left: 30px;">
@@ -129,9 +140,20 @@
 												</span>
 											</h4>
 										</td>
-										<td style="padding-left: 30px;"><input type="text"
+<!-- 										<td style="padding-left: 30px;"><input type="text"
 											id="category" name="addAssetsForm.category"
-											ng-model="addAssetsForm.category" style="width: 407px;"></td>
+											ng-model="addAssetsForm.category" style="width: 407px;"></td> -->
+										<td style="padding-left: 30px;"><select id="category"
+											style="width: 100px"><option>Watson</option>
+												<option>Mobile</option>
+												<option>DevOps</option>
+												<option>Liberty</option>
+												<option>Weather</option>
+												<option>Message Hub</option>
+												<option>Containers</option>
+												<option>Security</option>
+												<option>IOT</option>
+												<option>API</option></select></td>
 										<td style="width: 220px; color: red">
 											<div class="caption">
 												<span>{{addAssetsForm.validcategory}}</span>
@@ -167,14 +189,16 @@
 											</h4>
 										</td>
 										<td style="padding-left: 30px;"><select id="isProtected"
-											style="width: 100px"><option>YES</option>
-												<option>NO</option></select></td>
+											style="width: 100px"><option>yes</option>
+												<option>no</option></select></td>
 									</tr>
 									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
 										<td style="padding-left: 40px;"><a
 											class="btn btn-primary pull-left " href="#"
 											ng-click="addAsset()"> OK <span class="glyphicon"
-												aria-hidden="true"></span></a></td>
+												aria-hidden="true"></span></a><a><span
+														us-spinner="{radius:15, width:4, length: 8}"
+														spinner-key="spinner-1"></span></a></td>
 										<td><button type="submit"
 												class="btn btn-danger btn-default pull-right"
 												data-dismiss="modal">
@@ -183,7 +207,7 @@
 										<!--    <td><a class="btn btn-primary pull-right " href="#" data-ui-sref="addassets" ng-click="deleteAssets()"  >Delete Records<span class="glyphicon" aria-hidden="true"></span></a></td>	 -->
 									</tr>
 
-									<td>
+<!-- 									<td>
 										<div ng-app="app">
 											<div class="btn-group">
 												<a class="disabled btn   pull-left"></span></a> <a><span
@@ -192,7 +216,7 @@
 											</div>
 										</div>
 									</td>
-
+ -->
 								</table>
 							</div>
 						</form>
@@ -234,7 +258,7 @@
 											<div class="caption">
 												<span>{{validlink}}</span>
 											</div></td>
-										<td>
+<!-- 										<td>
 											<div ng-app="app">
 												<div class="btn-group">
 													<a class="disabled btn   pull-left"></span></a> <a><span
@@ -243,7 +267,7 @@
 												</div>
 											</div>
 										</td>
-
+ -->
 									</tr>
 									<tr>
 										<td style="padding-left: 30px;"><h4>
@@ -263,7 +287,7 @@
 										<td style="padding-left: 30px;"><h4>
 												<span class="label label-primary">Industry Group : </span>
 											</h4></td>
-										<td style="padding-left: 30px;"><input type="text"
+<!-- 										<td style="padding-left: 30px;"><input type="text"
 											id="industry" name="industry"
 											ng-model="industry"
 											style="width: 407px;></td>
@@ -271,7 +295,18 @@
 											<div class="caption">
 												<span>{{validindustry}}</span>
 											</div></td>
-
+ -->
+ 
+  										<td style="padding-left: 30px;"><select id="industry" ng-model="selectedIndustryvalue"
+											style="width: 100px"><option>Insurance</option>
+												<option>Banking</option>
+												<option>Travel and Transport</option>
+												<option>Demo</option>
+												<option>Retail</option>
+												<option>Manufacturing</option>
+												<option>Healthcare</option>
+												<option>Energy</option></select></td>
+ 
 									</tr>
 									<tr>
 										<td style="padding-left: 30px;">
@@ -280,10 +315,25 @@
 												</span>
 											</h4>
 										</td>
-										<td style="padding-left: 30px;"><input type="text"
+<!-- 										<td style="padding-left: 30px;"><input type="text"
 											id="category" name="category"
 											ng-model="category" style="width: 407px;"></td>
-										<td style="width: 220px; color: red">
+ -->
+										<td style="padding-left: 30px;"><select id="category" ng-model="selectedCategoryvalue"
+											style="width: 100px"><option>Watson</option>
+												<option>Mobile</option>
+												<option>DevOps</option>
+												<option>Liberty</option>
+												<option>Weather</option>
+												<option>Message Hub</option>
+												<option>Containers</option>
+												<option>Security</option>
+												<option>IOT</option>
+												<option>API</option></select></td>
+ 
+ 
+ 
+ 										<td style="width: 220px; color: red">
 											<div class="caption">
 												<span>{{validcategory}}</span>
 											</div>
@@ -317,15 +367,17 @@
 												</span>
 											</h4>
 										</td>
-										<td style="padding-left: 30px;"><select id="isProtected"
-											style="width: 100px"><option>YES</option>
-												<option>NO</option></select></td>
+										<td style="padding-left: 30px;"><select id="isProtected" ng-model="selectedProtectedvalue"
+											style="width: 100px"><option>yes</option>
+												<option>no</option></select></td>
 									</tr>
 									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
 										<td style="padding-left: 40px;"><a
 											class="btn btn-primary pull-left " href="#"
-											ng-click="modifyAsset(link,title,industry,category,description,selectedItemvalue)"> OK <span class="glyphicon"
-												aria-hidden="true"></span></a></td>
+											ng-click="modifyAsset(link,title,selectedIndustryvalue,selectedCategoryvalue,description,selectedProtectedvalue)"> OK <span class="glyphicon"
+												aria-hidden="true"></span></a><a><span
+														us-spinner="{radius:15, width:4, length: 8}"
+														spinner-key="spinner-1"></span></a></td>
 										<td><button type="submit"
 												class="btn btn-danger btn-default pull-right"
 												data-dismiss="modal">

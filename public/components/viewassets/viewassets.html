@@ -142,7 +142,7 @@
 										<td>{{ assetrecord.industry }}</td>
 										<td>{{ assetrecord.description }}</td>
 										<td style="padding-left: 0px;">
-											<div class="dropdown" id="updatedeletemodel">
+											<div class="dropdown" id="updatedeletemodel" ng-show="loggedIn">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 													<span class="glyphicon glyphicon-cog"></span>
 												</a>
@@ -153,8 +153,9 @@
 													<li role="presentation"><a
 														ng-click="deleteAssets(assetrecord)">Delete</a></li>
 												</ul>
+												
 											</div>
-
+											<a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-del" ></span></a>
 										</td>
 
 									</tr>
@@ -177,7 +178,7 @@
 								<span ng-if=assetrecord.truncated
 									title={{assetrecord.description}}><br>{{assetrecord.truncatedDescription}}</span>
 								<br>
-								<div class="dropdown" id="updatedeletemodel">
+								<div class="dropdown" id="updatedeletemodel" ng-show="loggedIn">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 										<span class="glyphicon glyphicon-cog" style="padding-top: 15px;"></span>
 									</a>
@@ -185,10 +186,13 @@
 										<li role="presentation"><a ng-click="updateAssets(assetrecord)">Edit</a></li>
 										<li role="presentation"><a ng-click="deleteAssets(assetrecord)">Delete</a></li>
 									</ul>
+									
 								</div>
-
+								
 							</div>
+							
 						</div>
+						<a><span us-spinner="{radius:15, width:4, length: 8}" spinner-key="spinner-del" ></span></a>
 						<div ng-repeat-end=""></div>
 					</div>
 				</form>

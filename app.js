@@ -13,6 +13,8 @@ var express = require('express'), routes = require('./routes'), user = require('
 var app = express();
 
 var cloudant = require('cloudant')('https://512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix:c0f6f2d21676a8b0f6f369cf5076f649ef833da68e518b1b4c0fa79172723a1a@512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix.cloudant.com');
+
+
 var db = cloudant.db.use('csc_dashboard');
 var userdb = cloudant.db.use('csc_user');
 
@@ -125,7 +127,7 @@ app.post('/api/searchuser', function(request, response){
 												}
 												//push the JSON to an array.
 												docList.push(myDocument);
-												
+												console.log(myDocument);	
 											}
 											i++;						
 										
@@ -230,7 +232,8 @@ app.post('/api/adduser', function(req, response) {
     console.log("userid",userid);
    
     
-    localuserdb.find({selector:{"userid": userid}}, function(er, result) {
+//    localuserdb.find({selector:{"userid": userid}}, function(er, result) {
+    userdb.find({selector:{"userid": userid}}, function(er, result) {
 		  if (er) {
 				console.log('selector failed..');
 				response.status(500);
@@ -242,7 +245,8 @@ app.post('/api/adduser', function(req, response) {
 			  }	
 	          
 			  if(result.docs.length == 0){
-				  localuserdb.insert({ "userid":userid, "password":password}, function(err, body) {
+//				  localuserdb.insert({ "userid":userid, "password":password}, function(err, body) {
+				  userdb.insert({ "userid":userid, "password":password}, function(err, body) {
 			    	  if (err){
 						  	console.log('Add User failed..');
 							response.status(500);
@@ -284,7 +288,8 @@ app.post('/api/addasset', function(req, response) {
     var protectedAsset = req.body.protectedAsset;
     var industry = req.body.industry;
     
-    localdb.insert({ "_id":title,"titel":title,"link":link,"service_category":service,"description":desc,"created_date":createdDate,"modified_date":modifiedDate,"protected":protectedAsset,"industry":industry}, function(err, body) {
+//    localdb.insert({ "_id":title,"titel":title,"link":link,"service_category":service,"description":desc,"created_date":createdDate,"modified_date":modifiedDate,"protected":protectedAsset,"industry":industry}, function(err, body) {
+    db.insert({ "_id":title,"title":title,"link":link,"service_category":service,"description":desc,"created_date":createdDate,"modified_date":modifiedDate,"protected":protectedAsset,"industry":industry}, function(err, body) {
     	  if (err){
 			  	console.log('Add Asset failed..');
 				response.status(500);
@@ -308,7 +313,8 @@ app.post('/api/updateasset', function(req, response) {
 	console.log("POST method invoked..Updating asset..... ");
 	console.log(req.body);
       
-    localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+//    localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+	db.get(req.body.title, { revs_info: true }, function(err, doc) {
     	 if (!err) {
     	     //console.log(doc);
     	     
@@ -322,7 +328,8 @@ app.post('/api/updateasset', function(req, response) {
     	     doc.protected = req.body.protected;
     	     doc.industry = req.body.industry;
 
-    	     localdb.insert(doc, doc.id, function(err, doc) {
+//    	     localdb.insert(doc, doc.id, function(err, doc) {
+    	     db.insert(doc, doc.id, function(err, doc) {
     	    	 if (err){
     				  	console.log('Update Asset failed..');
     					response.status(500);
@@ -359,9 +366,11 @@ app.post('/api/deleteasset', function(req, response) {
 	console.log("POST method invoked..Deleting asset..... ");
 	console.log(req.body);
 	
-	localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+//	localdb.get(req.body.title, { revs_info: true }, function(err, doc) {
+	db.get(req.body.title, { revs_info: true }, function(err, doc) {
    	 if (!err) {
-   		localdb.destroy(doc._id, doc._rev, function(err){
+//   		localdb.destroy(doc._id, doc._rev, function(err){
+   		db.destroy(doc._id, doc._rev, function(err){
    			if(!err){
    				console.log('Delete Aseet Success..');
 	    		  response.status(200);

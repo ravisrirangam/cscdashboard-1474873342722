@@ -15,6 +15,9 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		var uname = angular.element('[id="username"]').val();
 		var pass = angular.element('[id="password"]').val();
 
+		$scope.loggedinusername=uname;
+		$scope.loggedinpassword=pass;
+		
 		$scope.startSpin();
 		$scope.spinneractive = true;
 
@@ -28,9 +31,9 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 			}
 		}
 
-		$http
+		var res = $http
 				.post("/api/searchuser/", userlogindata)
-				.success(
+				res.success(
 						function(data, status) {
 							$scope.assetrecords = data;
 							$scope.fetchdescription(data);
@@ -155,6 +158,21 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 			usSpinnerService.stop();
 		}
 	};
+	
+	
+    $scope.startSpindel = function() {
+        if (!$scope.spinneractive) {
+            usSpinnerService.spin('spinner-del');
+            $scope.startcounter++;
+        }
+    };
+
+    $scope.stopSpindel = function() {
+        if ($scope.spinneractive) {
+            usSpinnerService.stop('spinner-del');
+        }
+    };
+
 
 	$scope.spinneractive = false;
 	
@@ -222,14 +240,18 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
         });
         
         $http.post("/api/adduser", adduserdata).success(function(data, status) {
+        	$("#addUser").modal("hide");
         	alert(data);
+        	
         });
         
 	};
 	
 	$scope.addAsset = function()
 	{
-		
+		$scope.startSpin();
+		$scope.spinneractive = true;
+
 		var link = angular.element('[id="link"]').val();
 		var title = angular.element('[id="title"]').val();
 		var industry = angular.element('[id="industry"]').val();
@@ -247,118 +269,43 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
         	protectedAsset : isprotected
         });
         
-        $http.post("/api/addasset", adduserdata).success(function(data, status) {
-        	alert(data);
+       var res= $http.post("/api/addasset", adduserdata)
+       res.success(function(data, status) {
+        	var addstatus=data;
+        	if(status=200)
+        		{
+    		
+    		var userlogindata = JSON.stringify({
+    			userid : $scope.loggedinusername,
+    			password : $scope.loggedinpassword
+    		});
+    		var config = {
+    			headers : {
+    				'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+    			}
+    		}
+
+    		$http
+    				.post("/api/searchuser/", userlogindata)
+    				.success(
+    						function(data, status) {
+    							$scope.assetrecords = data;
+    							$scope.fetchdescription(data);
+    							$scope.stopSpin();
+    							$scope.privilegeusersoption='true';
+    							$scope.loggedIn = true;
+    							$("#addAsset").modal("hide");
+    							$window.alert(addstatus);
+    						});
+        		}
+//        	alert(data);
         });
-		
-		/*
-		if($scope.addAssetsForm.link==undefined){
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-	        alert('save');
-            $scope.stopSpin();
-            $scope.addAssetsForm.validlink="Link is missing";
-                return;
-            }
-		else	if($scope.addAssetsForm.title==undefined){
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-	        alert('save');
-            $scope.stopSpin();
-            $scope.addAssetsForm.validtitle="Title is missing";
-                return;
-            }
-
-		else	if($scope.addAssetsForm.industry==undefined){
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-	        alert('save');
-            $scope.stopSpin();
-            $scope.addAssetsForm.validindustry="Industry Group is missing";
-                return;
-            }
-		else	if($scope.addAssetsForm.category==undefined){
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-	        alert('save');
-            $scope.stopSpin();
-            $scope.addAssetsForm.validcategory="Category is missing";
-                return;
-            }
-		else	if($scope.addAssetsForm.description==undefined){
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-	        alert('save');
-            $scope.stopSpin();
-            $scope.addAssetsForm.validdescription="Description is missing";
-                return;
-            }
-
-		else{
-			$scope.addAssetsForm.validlink="";
-			$scope.addAssetsForm.validtitle="";
-			$scope.addAssetsForm.validindustry="";
-			$scope.addAssetsForm.validcategory="";
-			$scope.addAssetsForm.validdescription="";
-			
-			var assetdata =$scope.addAssetsForm; 
-
-	        $scope.startSpin();
-	        $scope.spinneractive = true;
-
-			
-	        var res = $http.post('api/addupdateasset', assetdata);
-
-	        res.success(function(data, status, headers, config) {
-	            $scope.message = data;
-	            alert($scope.message.ok)
-	           
-	            $scope.stopSpin();
-	        });
-	        res.error(function(data, status, headers, config) {
-	        	$scope.stopSpin();
-	            alert( "failure message: " + JSON.stringify({data: data}));
-	            
-	        });
-
-			
-			
-				
-		}*/
-		
-		
-		
-		
+		res.error(function(data, status, headers, config) {
+			alert("failure message: " + JSON.stringify({
+				data : data
+			}));
+			$scope.stopSpin();
+		});
 	};
 	
 	$scope.privilegeusersopt = {Public : "no",
@@ -374,24 +321,54 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		};
 
 	
-$scope.updateAssets = function(assetrecord)
-{
-	alert('link value is : ' + assetrecord.link)
-}
 
 
 $scope.deleteAssets = function(assetrecord)
 {
+	
+	
+
 	//alert('link will be deleted : ' + assetrecord.link)
 	var	deleteAssetAns = $window.confirm('Are you sure you want to delete the Asset?');
     if(deleteAssetAns){
+
+    	
+    	$scope.startSpindel();
+    	$scope.spinneractive = true;
+
+
      //Your action will goes here
     	var res = $http.post('api/deleteasset', JSON.stringify({title:assetrecord.title}));
 
         res.success(function(data, status, headers, config) {
             $scope.successmessage = data;
-            $window.alert($scope.successmessage);          
-            $scope.stopSpin();
+            var deletestatus=data;
+        	if(status=200)
+    		{
+		
+		var userlogindata = JSON.stringify({
+			userid : $scope.loggedinusername,
+			password : $scope.loggedinpassword
+		});
+		var config = {
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+			}
+		}
+
+		$http
+				.post("/api/searchuser/", userlogindata)
+				.success(
+						function(data, status) {
+							$scope.assetrecords = data;
+							$scope.fetchdescription(data);
+							$scope.stopSpindel();
+							$scope.privilegeusersoption='true';
+							$scope.loggedIn = true;
+				            $window.alert(deletestatus);          
+						});
+    		}
+            
         });
         res.error(function(data, status, headers, config) {
         	$scope.stopSpin();
@@ -406,20 +383,20 @@ $scope.updateAssets = function(assetrecord)
 {
 	
 	
-	
 	$scope.link=assetrecord.link;
 	$scope.title=assetrecord.title;
-	$scope.industry=assetrecord.industry;
-	$scope.category=assetrecord.service_category;
+	$scope.selectedIndustryvalue=assetrecord.industry;
+	$scope.selectedCategoryvalue=assetrecord.service_category;
 	$scope.description=assetrecord.description;
-	$scope.selectedItemvalue=assetrecord.protected.toUpperCase();
-
-	
-	
+	$scope.selectedProtectedvalue=assetrecord.protected;
 	$("#modifyAsset").modal();
 }
 
 $scope.modifyAsset = function(link,title,industry,category,description,selectedItemvalue){
+	
+	$scope.startSpin();
+	$scope.spinneractive = true;
+
 	
 	var usermodifydata = JSON.stringify({
 		title : title,
@@ -432,13 +409,48 @@ $scope.modifyAsset = function(link,title,industry,category,description,selectedI
 	
 
 	
-	$http
+var res= 	$http
 	.post("/api/updateasset", usermodifydata)
-	.success(
+	res.success(
 			function(data, status) {
-				alert('data : ' + data );
-				alert('status : ' + status);
-			});
+				var updatestaus=data;
+	        	if(status=200)
+        		{
+    		
+    		var userlogindata = JSON.stringify({
+    			userid : $scope.loggedinusername,
+    			password : $scope.loggedinpassword
+    		});
+    		var config = {
+    			headers : {
+    				'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+    			}
+    		}
+
+    		$http
+    				.post("/api/searchuser/", userlogindata)
+    				.success(
+    						function(data, status) {
+    							$scope.assetrecords = data;
+    							$scope.fetchdescription(data);
+    							$scope.stopSpin();
+    							$scope.privilegeusersoption='true';
+    							$scope.loggedIn = true;
+    							alert(updatestaus);
+    							$("#modifyAsset").modal("hide");
+    						});
+        		}
+
+        });
+	res.error(function(data, status, headers, config) {
+		alert("failure message: " + JSON.stringify({
+			data : data
+		}));
+		$scope.stopSpin();
+		$scope.privilegeusersoption='true';
+
+	});
+			
 }
 
 		
