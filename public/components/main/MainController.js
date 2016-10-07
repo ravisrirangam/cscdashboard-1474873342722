@@ -25,10 +25,16 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	}
 
 	$scope.modeldialogadduser = function() {		
+		angular.element('[id="username1"]').val('');
+		angular.element('[id="password1"]').val('');
 		 $("#addUser").modal();
 	};
 	
 	$scope.modeldialogaddasset = function() {		
+		angular.element('[id="link"]').val('');
+		angular.element('[id="title"]').val('');
+		angular.element('[id="description"]').val('');
+		
 		 $("#addAsset").modal();
 	};
 	
