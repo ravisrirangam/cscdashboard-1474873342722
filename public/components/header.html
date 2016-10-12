@@ -24,7 +24,7 @@
 
 
 
-		<div ng-hide="loggedIn">
+<!-- 		<div ng-hide="loggedIn">
 			<ul class="nav navbar-nav navbar-right">
 				<li></li>
 				<li><a ng-click="modeldialoglogin()" href="#"
@@ -32,14 +32,32 @@
 						Login</a></li>
 			</ul>
 		</div>
-
-		<div ng-show="loggedIn">
-
-			<ul class="nav navbar-nav navbar-right">
-				<!-- 	     	<li><a ng-click="viewAsset()" href="#"
-				data-toggle="modal"><span class="glyphicon glyphicon-th-list"></span>
-					View Asset</a></li> 
  -->
+		<!-- <div ng-show="loggedIn"> -->
+				<div ng-show="showview">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a ng-click="modeldialoglogout()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-log-out"></span>
+						Logout</a></li>
+			</ul>
+		</div>
+		
+		
+				<div ng-show="showedit">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a ng-click="modeldialogaddasset()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
+						Add Asset</a></li>
+				<li><a ng-click="modeldialoglogout()" href="#"
+					data-toggle="modal"><span class="glyphicon glyphicon-log-out"></span>
+						Logout</a></li>
+			</ul>
+		</div>
+		
+		
+		
+		<div ng-show="showeditadmin">
+			<ul class="nav navbar-nav navbar-right">
 				<li><a ng-click="modeldialogaddasset()" href=""
 					data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span>
 						Add Asset</a></li>
@@ -49,7 +67,6 @@
 				<li><a ng-click="modeldialoglogout()" href="#"
 					data-toggle="modal"><span class="glyphicon glyphicon-log-out"></span>
 						Logout</a></li>
-
 			</ul>
 		</div>
 
@@ -194,7 +211,7 @@
 									</tr>
 									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
 										<td style="padding-left: 40px;"><a
-											class="btn btn-primary pull-left " href="#"
+											class="btn btn-primary pull-left " href="#" data-ui-sref="viewassets"
 											ng-click="addAsset()"> OK <span class="glyphicon"
 												aria-hidden="true"></span></a><a><span
 														us-spinner="{radius:15, width:4, length: 8}"
@@ -373,8 +390,8 @@
 									</tr>
 									<tr style="padding-top: 10px; margin-top: 10px; height: 50px;">
 										<td style="padding-left: 40px;"><a
-											class="btn btn-primary pull-left " href="#"
-											ng-click="modifyAsset(link,title,selectedIndustryvalue,selectedCategoryvalue,description,selectedProtectedvalue)"> OK <span class="glyphicon"
+											class="btn btn-primary pull-left " href="#" data-ui-sref="viewassets"
+											ng-click="modifyAsset(link,title,selectedIndustryvalue,selectedCategoryvalue,description,selectedProtectedvalue)"> Update <span class="glyphicon"
 												aria-hidden="true"></span></a><a><span
 														us-spinner="{radius:15, width:4, length: 8}"
 														spinner-key="spinner-1"></span></a></td>
@@ -434,6 +451,21 @@
 									type="password" class="form-control" id="password1"
 									placeholder="Enter password">
 							</div>
+							<div class="form-group">
+
+               <label for="role"><span class="glyphicon glyphicon-education"></span> Role</label>
+
+               <select ng-model="userrole" id="role"
+
+                 ng-options="roleoption for (roleoption, rolevalue) in roleopt"
+
+                 style="margin-top: 10px;">
+
+               <option value="">-- Select Role --</option>
+
+               </select>
+
+             </div> 
 							<button style="background-color: #3366CC;" type="submit"
 								class="btn btn-success btn-block" ng-click="addUser()">
 								<span class="glyphicon glyphicon-plus"></span> Add User

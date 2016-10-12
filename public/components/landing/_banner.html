@@ -1,0 +1,69 @@
+<div class="jumbotron jumbotron-welcome">
+  <div class="container">
+     <header data-ng-if="getSession() == null"> 
+      <a class="navbar-brand navbar-brand-nopadding pull-left" href="/">
+        <img alt="Bluemix logo" height="50" width="auto" src="images/logo.png">
+      </a>
+      <a class="btn btn-info btn-inverse pull-right" href="#" data-ng-click="modeldialoglogin()">Sign In</a>
+      
+				<div class="modal fade bs-example-modal-sm" id="userLogin"
+			role="dialog"
+			style="padding: 35px 50px; width: 180px; height: 270px; right: 0; left: auto; margin-top: 60px !important;"
+			aria-hidden="false">
+			<div class="modal-dialog modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content ">
+					<div class="modal-body"
+						style="padding: 0px 10px; max-height: 200px;">
+						<form role="form">
+							<div class="form-group">
+								<label for="usrname"><span
+									class="glyphicon glyphicon-user"></span> Username</label> <input
+									type="text" class="form-control" id="username"
+									placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon-eye-open"></span> Password</label> <input
+									type="password" class="form-control" id="password"
+									placeholder="Enter password">
+							</div>
+							<button style="background-color: #3366CC;" href="#"
+								data-ui-sref="landing" type="submit"
+								class="btn btn-success btn-block" ng-click="userlogin()">
+								<span class="glyphicon glyphicon-off"></span> Login
+							</button>
+
+
+						</form>
+					</div>
+					<div class="modal-footer" style="padding: 0px 10px;">
+						<button type="submit" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Cancel
+						</button>
+					</div>
+					<!-- <span us-spinner></span> -->
+					<a><span us-spinner="{radius:15, width:4, length: 8}"
+						spinner-key="spinner-1"></span></a>
+
+				</div>
+
+			</div>
+		</div>
+		
+     </header> 
+    <div class="jumbotron-headline">
+      <div class="jumbotron-headline-cell">
+        <h2>CSC Assets Dashboard</h2>
+        <p>Powered by IBM Bluemix</p>
+        <a class="navbar-brand navbar-brand-nopadding pull-right" href="/">
+          <img alt="CSC Logo" height="50" width="auto" src="images/1000px-CSC_Logo.svg.png">
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

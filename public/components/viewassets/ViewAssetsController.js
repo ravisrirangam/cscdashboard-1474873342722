@@ -1,7 +1,7 @@
 'use strict';
 
 var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
-		$rootScope ) {
+		$rootScope,$state,$sessionStorage ) {
 
 	
 	$scope.loggedIn = false;
@@ -11,10 +11,21 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	};
 
 	$scope.privilegeduser = function() {
+		
+		alert('session value is ' + $scope.$storage.session.username + 'and profile is ' + $scope.$storage.session.profile);		
 
-		var uname = angular.element('[id="username"]').val();
-		var pass = angular.element('[id="password"]').val();
-
+//		var uname = angular.element('[id="username"]').val();
+//		var pass = angular.element('[id="password"]').val();
+		
+		var uname = $scope.$storage.session.username;
+			var pass = $scope.$storage.session.password;
+			
+			$scope.profile=$scope.$storage.session.password;
+			
+			$scope.loggedInProfile=false;
+			
+			alert('profile id : '+$scope.$storage.session.profile);
+				
 		$scope.loggedinusername=uname;
 		$scope.loggedinpassword=pass;
 		
@@ -40,18 +51,21 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 							$scope.stopSpin();
 							$scope.privilegeusersoption='true';
 							$scope.loggedIn = true;
+		//					$state.go('viewassets');
 							$("#userLogin").modal("hide");
 							if (JSON.stringify(data) == '{"UserExists":"False","PWCheck":"False"}') {
 								alert('User is not registered');
 								$scope.stopSpin();
 								$scope.privilegeusersoption='false';
 								$scope.loggedIn = false;
+			//					$state.go('/');
 								$("#userLogin").modal("hide");
 							} else if (JSON.stringify(data) == '{"UserExists":"True","PWCheck":"False"}') {
 								alert('Invalid Password');
 								$scope.stopSpin();
 								$scope.privilegeusersoption='false';
 								$scope.loggedIn = false;
+				//				$state.go('/');
 								$("#userLogin").modal("hide");
 							}
 						});
@@ -65,9 +79,59 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 			$("#userLogin").modal("hide");
 		});
 	};
+	
+	$scope.roleopt = {admin : "admin",
+
+		     edit : "edit",
+
+		     view : "view"
+
+		   }; 
 
 	$scope.fetchassetsdetails = function() {
-		$scope.privilegeusersoption='false';
+		
+		$scope.startSpin();
+		$scope.spinneractive = true;
+
+		
+		var userprofile = $scope.$storage.session.profile;
+		
+		if(userprofile == 'view')
+			{
+			$scope.showview=true;
+			$scope.showedit=false;
+			$scope.showeditadmin=false;
+			$scope.showeditadmindetail=false;
+			}		
+		else if(userprofile == 'edit')
+			{
+			$scope.showview=false;
+			$scope.showedit=true;
+			$scope.showeditadmin=false;
+			$scope.showeditadmindetail=true;
+			}
+		else if(userprofile == 'admin')
+		{
+		$scope.showview=false;
+		$scope.showedit=false;
+		$scope.showeditadmin=true;
+		$scope.showeditadmindetail=true;
+		}
+
+		
+		
+//		if($scope.$storage.session.profile=='admin')
+//			{
+//			$scope.showeditadmin=true;
+//			alert('in true' +$scope.showeditadmin);
+//			}
+//			else
+//				{
+//				$scope.showeditadmin=true;
+//				alert('in false' +$scope.showeditadmin);
+//				}
+		
+		$scope.privilegeusersoption='true';
 				$http
 						.get('/api/fetchassetsdtls')
 						.success(
@@ -234,10 +298,12 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	$scope.addUser = function() {
 		var uname = angular.element('[id="username1"]').val();
 		var pass = angular.element('[id="password1"]').val();
+		var role = angular.element('[id="role"]').val();
 		
         var adduserdata = JSON.stringify({
         	userid: uname,
-        	password: pass
+        	password: pass,
+        	 role: role
         });
         
         $http.post("/api/adduser", adduserdata).success(function(data, status) {
@@ -287,7 +353,7 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
     		}
 
     		$http
-    				.post("/api/searchuser/", userlogindata)
+    				.get("/api/fetchassetsdtls")
     				.success(
     						function(data, status) {
     							$scope.assetrecords = data;
@@ -315,10 +381,14 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		};
 
 	$scope.modeldialoglogout = function() {
-		var backlen = history.length;
-	    history.go(-backlen);
-	    
-	    window.location.replace("/");
+		
+		$scope.$storage.session = null;
+		$state.go('landing');
+
+//		var backlen = history.length;
+//	    history.go(-backlen);
+//	    
+//	    window.location.replace("/");
 		};
 
 	
@@ -358,7 +428,7 @@ $scope.deleteAssets = function(assetrecord)
 		}
 
 		$http
-				.post("/api/searchuser/", userlogindata)
+				.get("/api/fetchassetsdtls")
 				.success(
 						function(data, status) {
 							$scope.assetrecords = data;
@@ -399,6 +469,9 @@ $scope.modifyAsset = function(link,title,industry,category,description,selectedI
 	$scope.spinneractive = true;
 
 	
+	
+	
+	
 	var usermodifydata = JSON.stringify({
 		title : title,
 		link : link,
@@ -429,7 +502,7 @@ var res= 	$http
     		}
 
     		$http
-    				.post("/api/searchuser/", userlogindata)
+    				.get("/api/fetchassetsdtls")
     				.success(
     						function(data, status) {
     							$scope.assetrecords = data;

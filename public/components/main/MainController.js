@@ -1,17 +1,21 @@
-var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'context','$http', function($scope, $rootScope, $state, $sessionStorage, context,$http) {
+var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'context','$http','$window', 'usSpinnerService', function($scope, $rootScope, $state, $sessionStorage, context,$http,$window, usSpinnerService) {
 
 	$scope.$storage = $sessionStorage;
 
 	$scope.getSession = function() {
-//		return $scope.$storage.session;
-		return true;
+		return $scope.$storage.session;
 	};
 
 	$scope.loggedIn = false;
 	
 	$scope.login = function() {
+		
+		alert('jjj');
+		
+		
 		$scope.$storage.session = { 'username' : 'test' };
-		$state.go('dashboard');
+	//	$state.go('viewassets');
+		$state.go('/');
 	};
 
 	$scope.logout = function() {
@@ -27,6 +31,8 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	$scope.modeldialogadduser = function() {		
 		angular.element('[id="username1"]').val('');
 		angular.element('[id="password1"]').val('');
+		angular.element('[id="role"]').val('');
+		
 		 $("#addUser").modal();
 	};
 	
@@ -39,7 +45,92 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	};
 	
 
-	    
+	    $scope.userlogin = function()
+	    {
+			$scope.startSpin();
+			$scope.spinneractive = true;
+
+			var uname = angular.element('[id="username"]').val();
+			var pass = angular.element('[id="password"]').val();
+
+			$scope.loggedinusername=uname;
+			$scope.loggedinpassword=pass;
+			
+//			$scope.startSpin();
+//			$scope.spinneractive = true;
+
+			var userlogindata = JSON.stringify({
+				userid : uname,
+				password : pass
+			});
+			var config = {
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			}
+
+			var res = $http
+					.post("/api/searchuser/", userlogindata)
+					res.success(
+							function(data, status) {
+								
+								if(data.Userid == 'null')
+									{
+									alert('User is not registered');
+									$("#userLogin").modal("hide");
+									$state.go('landing');
+									}
+								else if (data.PWCheck=='False')
+									{
+									alert('Invalid Password');
+									$("#userLogin").modal("hide");
+									$state.go('landing');
+									}
+								else if(data.Userid !='null' && data.PWCheck !='False')
+									{
+									$scope.$storage.session = { 'username' : data.Userid,'profile':data.Role };
+									$("#userLogin").modal("hide");
+									$state.go('viewassets');
+									}
+//								$scope.assetrecords = data;
+//								alert(angular.toJson(data.Userid));
+////								$scope.fetchdescription(data);
+////								$scope.stopSpin();
+//								$scope.privilegeusersoption='true';
+//								$scope.loggedIn = true;
+//								if(pass=='divya'){
+//								$scope.$storage.session = { 'username' : uname,'password' : pass,'profile':'view' };
+//								}else if(pass=='nidhi'){
+//								$scope.$storage.session = { 'username' : uname,'password' : pass,'profile':'view' };
+//								}else if(pass=='sudhir' || pass=='ravi'){
+//								$scope.$storage.session = { 'username' : uname,'password' : pass,'profile':'admin' };
+//								}
+//								$state.go('viewassets');
+//								$("#userLogin").modal("hide");
+//								if (JSON.stringify(data) == '{"UserExists":"False","PWCheck":"False"}') {
+//									alert('User is not registered');
+////									$scope.stopSpin();
+//									$scope.privilegeusersoption='false';
+//									$scope.loggedIn = false;
+//									$state.go('landing');
+//									$("#userLogin").modal("hide");
+//								} else if (JSON.stringify(data) == '{"UserExists":"True","PWCheck":"False"}') {
+//									alert('Invalid Password');
+////									$scope.stopSpin();
+//									$scope.privilegeusersoption='false';
+//									$scope.loggedIn = false;
+//									$state.go('landing');
+//									$("#userLogin").modal("hide");
+//								}
+							});
+			res.error(function(data, status, headers, config) {
+				alert("failure message: " + JSON.stringify({
+					data : data
+				}));
+				$scope.loggedIn = false;
+				$("#userLogin").modal("hide");
+			});
+	    };
 	    
 
 
@@ -82,6 +173,21 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
             saveAsset(asset);
         });
     };
+
+    
+	$scope.startcounter = 0;
+	$scope.startSpin = function() {
+		if (!$scope.spinneractive) {
+			usSpinnerService.spin('spinner-1');
+			$scope.startcounter++;
+		}
+	};
+
+	$scope.stopSpin = function() {
+		if ($scope.spinneractive) {
+			usSpinnerService.stop('spinner-1');
+		}
+	};
 
 	
 //	$scope.userlogin = function() {

@@ -12,23 +12,23 @@ app.config(['stateHelperProvider','$urlRouterProvider','$urlMatcherFactoryProvid
 	$urlMatcherFactoryProvider.strictMode(true)
 
 	stateHelperProvider.state({
-/*		name: "landing",
+		name: "landing",
 		url: "/",
 		templateUrl: "components/landing/landing.html",
 		controller: "MainController",
 		data: { requireLogin : false }
 	}).state({
-		name: "dashboard",
+/*		name: "dashboard",
 		url: "/dashboard",
 		templateUrl: "components/dashboard/dashboard.html",
 		controller: "DashboardController",
 		data: { requireLogin : false }
 	}).state({
 */		name: "viewassets",
-		url: "/",
+		url: "/viewassets",
 		templateUrl: "components/viewassets/viewassets.html",
 		controller: "ViewAssetsController",
-		data: { requireLogin : false }
+		data: { requireLogin : true }
 	}).state({
 		name: "addassets",
 		url: "/addassets",
