@@ -50,8 +50,8 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 			$scope.startSpin();
 			$scope.spinneractive = true;
 
-			var uname = angular.element('[id="username"]').val();
-			var pass = angular.element('[id="password"]').val();
+			var uname = angular.element('[id="loginusername"]').val();
+			var pass = angular.element('[id="loginpassword"]').val();
 
 			$scope.loggedinusername=uname;
 			$scope.loggedinpassword=pass;
