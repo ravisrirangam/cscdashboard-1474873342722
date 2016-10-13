@@ -150,6 +150,16 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 			 document.getElementById('OtherIndustry').style.display = 'none';
 		 }
 	}
+	
+  $scope.modifyCheckIndustry = function() {
+		
+		var val = angular.element('[id="modifyindustry"]').val();
+		 if(val === "Other"){
+			 document.getElementById('modifyOtherIndustry').style.display = 'inline-block';
+		 }else{
+			 document.getElementById('modifyOtherIndustry').style.display = 'none';
+		 }
+	}
 
 
 	$scope.selectedusers = function() {
@@ -482,9 +492,8 @@ $scope.modifyAsset = function(link,title,industry,category,description,selectedI
 	$scope.startSpin();
 	$scope.spinneractive = true;
 
-	
-	
-	
+	if(industry === "Other") 
+		industry = angular.element('[id="modifyOtherIndustry"]').val();
 	
 	var usermodifydata = JSON.stringify({
 		title : title,

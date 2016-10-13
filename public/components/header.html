@@ -276,7 +276,7 @@
 										<td style="padding-left: 30px;"><input id="link"
 											type="text" name="link"
 											ng-model="link"
-											style="width: 407px; ></td>
+											style="width: 407px;"/></td>
 					<td style="width:220px;color:red" >
 											<div class="caption">
 												<span>{{validlink}}</span>
@@ -299,7 +299,7 @@
 										<td style="padding-left: 30px;"><input type="text"
 											id="title" name="title"
 											ng-model="title"
-											style="width: 407px;></td>
+											style="width: 407px;"/></td>
 						<td style="width:220px;color:red" >
 											<div class="caption">
 												<span>{{validtitle}}</span>
@@ -319,16 +319,21 @@
 												<span>{{validindustry}}</span>
 											</div></td>
  -->
- 
-  										<td style="padding-left: 30px;"><select id="industry" ng-model="selectedIndustryvalue"
-											style="width: 100px"><option>Insurance</option>
-												<option>Banking</option>
-												<option>Travel and Transport</option>
-												<option>Demo</option>
-												<option>Retail</option>
-												<option>Manufacturing</option>
-												<option>Healthcare</option>
-												<option>Energy</option></select></td>
+
+												
+										<td style="padding-left: 30px;"><select id="modifyindustry" ng-change='modifyCheckIndustry();' ng-model="selectedIndustryvalue"
+											style="width: 100px">
+												
+								<option	ng-repeat="assetrecord in assetrecords| unique: 'industry'">
+								{{assetrecord.industry}}
+							    </option>
+							    	<option>Other</option>
+                                 </select>
+                                 <input id="modifyOtherIndustry"
+											type="text" 
+											style="width: 293px; margin-left: 10px; display:none"/>
+											
+								</td>
  
 									</tr>
 									<tr>
@@ -446,18 +451,18 @@
      -->
 					<div class="modal-body"
 						style="padding: 0px 10px; max-height: 400px;">
-						<form role="form">
+						<form role="form" >
 							<div class="form-group">
 								<label for="usrname"><span
 									class="glyphicon glyphicon-user"></span> UserName</label> <input
-									type="text" class="form-control" id="username1"
-									placeholder="Enter email">
+									type="text" class="form-control" id="username1" 
+									placeholder="Enter email" required>
 							</div>
 							<div class="form-group">
 								<label for="psw"><span
 									class="glyphicon glyphicon-eye-open"></span> Password</label> <input
 									type="password" class="form-control" id="password1"
-									placeholder="Enter password">
+									placeholder="Enter password" required>
 							</div>
 							<div class="form-group">
 
@@ -467,7 +472,7 @@
 
                  ng-options="roleoption for (roleoption, rolevalue) in roleopt"
 
-                 style="margin-top: 10px;">
+                 style="margin-top: 10px;" required>
 
                <option value="">-- Select Role --</option>
 
