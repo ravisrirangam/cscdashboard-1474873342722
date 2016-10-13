@@ -114,6 +114,7 @@
 							<table class="table table-hover table-striped">
 								<thead>
 									<tr>
+										<th><label></label>
 										<th><label class="titletxt" ng-model="find.title">Title</label></th>
 										<th><input type="text" ng-model="find.service_category"
 											id="searchcategory" ng-blur="categoryblur()"
@@ -134,6 +135,9 @@
 									<tr
 										ng-repeat="assetrecord in assetrecords | filterByProperty:filterType:menuselectedfilter | filter:find | orderBy:propertyName:reverse ">
 										<!-- <tr ng-repeat="assetrecord in assetrecords | filter:find | orderBy:propertyName:reverse "> -->
+										<td> <div style="display: inline-block" class="pull-left">
+											 <img height="45" width="auto" src="images/Services/{{assetrecord.service_category}}.png" style="margin-top: 10px;">
+											 </div></td>
 										<td><div>
 												<a ng-href={{assetrecord.link}} target="_blank"
 													style="color: #3366CC;">{{ assetrecord.title }}</a>
@@ -169,6 +173,9 @@
 							ng-repeat-start="assetrecord in assetrecords | filterByProperty:filterType:menuselectedfilter | filter:find | orderBy:propertyName:reverse"
 							ng-class="{'col-md-4':mode==1, 'col-md-3':mode==2}">
 							<div class="well" ng-show="mode==2">
+								<div style="display: inline-block" class="action-items pull-center">
+											 <img class="center-block" height="50" width="auto" src="images/Services/{{assetrecord.service_category}}.png" style="margin-top: 10px;">
+								</div>
 								<h5 style="margin-top: 0px;">
 									<a ng-href={{assetrecord.link}} target="_blank"
 										style="color: #3366CC;">{{assetrecord.title}}</a>
