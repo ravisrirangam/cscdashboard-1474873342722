@@ -140,6 +140,16 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 									$scope.fetchdescription(assetdetails);
 									});
 	};
+	
+	$scope.checkIndustry = function() {
+		
+		var val = angular.element('[id="industry"]').val();
+		 if(val === "Other"){
+			 document.getElementById('OtherIndustry').style.display = 'inline-block';
+		 }else{
+			 document.getElementById('OtherIndustry').style.display = 'none';
+		 }
+	}
 
 
 	$scope.selectedusers = function() {
@@ -183,6 +193,8 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 	};
 	$scope.filterCategory = function(filtername) {
 		$scope.filterType = filtername;
+		
+		$scope.find={};
 		
 		$scope.find.service_category = "";
 		$scope.find.industry = "";
@@ -326,6 +338,8 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 		var description = angular.element('[id="description"]').val();
 		var isprotected = angular.element('[id="isProtected"]').val();
 		
+		if(industry === "Other") 
+			industry = angular.element('[id="OtherIndustry"]').val();
 		
         var adduserdata = JSON.stringify({
         	link : link,

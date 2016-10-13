@@ -118,7 +118,7 @@
 										<td style="padding-left: 30px;"><input type="text"
 											id="title" name="addAssetsForm.title"
 											ng-model="addAssetsForm.title"
-											style="width: 407px;></td>
+											style="width: 407px;"/></td>
 						<td style="width:220px;color:red" >
 											<div class="caption">
 												<span>{{addAssetsForm.validtitle}}</span>
@@ -139,16 +139,20 @@
 											</div></td>
  -->
  
- 										<td style="padding-left: 30px;"><select id="industry"
-											style="width: 100px"><option>Insurance</option>
-												<option>Banking</option>
-												<option>Travel and Transport</option>
-												<option>Demo</option>
-												<option>Retail</option>
-												<option>Manufacturing</option>
-												<option>Healthcare</option>
-												<option>Energy</option></select></td>
- 
+ 										<td style="padding-left: 30px;"><select id="industry" ng-change='checkIndustry();' ng-model=industry
+											style="width: 100px">
+							
+												
+								<option	ng-repeat="assetrecord in assetrecords| unique: 'industry'">
+								{{assetrecord.industry}}
+							    </option>
+							    	<option>Other</option>
+                                 </select>
+                                 <input id="OtherIndustry"
+											type="text" 
+											style="width: 293px; margin-left: 10px; display:none"/>
+											
+								</td>
 									</tr>
 									<tr>
 										<td style="padding-left: 30px;">
@@ -164,7 +168,7 @@
 											style="width: 100px"><option>Watson</option>
 												<option>Mobile</option>
 												<option>DevOps</option>
-												<option>Web And Application</option>
+												<option>Web and Application</option>
 												<option>Network</option>
 												<option>Integration</option>
 												<option>Data and Analytics</option>

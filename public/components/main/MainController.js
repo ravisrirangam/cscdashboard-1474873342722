@@ -39,6 +39,7 @@ var MainController =  ['$scope','$rootScope','$state','$sessionStorage', 'contex
 	$scope.modeldialogaddasset = function() {		
 		angular.element('[id="link"]').val('');
 		angular.element('[id="title"]').val('');
+		angular.element('[id="OtherIndustry"]').val('');
 		angular.element('[id="description"]').val('');
 		
 		 $("#addAsset").modal();
