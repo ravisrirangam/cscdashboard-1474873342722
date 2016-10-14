@@ -343,7 +343,7 @@ var ViewAssetsController = function($scope, $http, $window, usSpinnerService,
 
 		var link = angular.element('[id="link"]').val();
 		var title = angular.element('[id="title"]').val();
-		var industry = angular.element('[id="industry"]').val();
+		var industry = angular.element('[id="industry"]').val().trim();
 		var category = angular.element('[id="category"]').val();
 		var description = angular.element('[id="description"]').val();
 		var isprotected = angular.element('[id="isProtected"]').val();
@@ -491,6 +491,8 @@ $scope.modifyAsset = function(link,title,industry,category,description,selectedI
 	
 	$scope.startSpin();
 	$scope.spinneractive = true;
+	
+	industry = industry.trim();
 
 	if(industry === "Other") 
 		industry = angular.element('[id="modifyOtherIndustry"]').val();
