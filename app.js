@@ -7,8 +7,8 @@ var express = require('express'), routes = require('./routes'), user = require('
 
 var app = express();
 
-var cloudant = require('cloudant')('https://512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix:c0f6f2d21676a8b0f6f369cf5076f649ef833da68e518b1b4c0fa79172723a1a@512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix.cloudant.com');
-
+//var cloudant = require('cloudant')('https://512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix:c0f6f2d21676a8b0f6f369cf5076f649ef833da68e518b1b4c0fa79172723a1a@512b6a00-e4a6-48ba-975f-c8e8acef062a-bluemix.cloudant.com'); Old DB Credentials
+var cloudant = require('cloudant')('https://49b76757-eb17-4951-8d3e-841566285ea6-bluemix:16aba818a3a24e9e3cf2dae280ddae8e684cf991a098fdc800dbc04f3ba86961@49b76757-eb17-4951-8d3e-841566285ea6-bluemix.cloudant.com'); // Changed credentials to new db.
 
 var db = cloudant.db.use('csc_dashboard');
 var userdb = cloudant.db.use('csc_user');
